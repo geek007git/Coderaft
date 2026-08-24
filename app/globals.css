@@ -15,8 +15,8 @@
   --color-ink: #f4f6f7;
   --color-ink-2: #b6bcc2;
   --color-ink-3: #7e868e;
-  --color-ink-4: #545b63;
-  --color-ink-5: #363c43;
+  --color-ink-4: #717983;
+  --color-ink-5: #575d65;
 
   /* ---- Accent: used strategically, never decoratively -------------------- */
   --color-accent: #23d18b;
@@ -63,6 +63,12 @@
   --glass-1-blur: 26px;
   --glass-2-bg: rgba(255, 255, 255, 0.03);
   --glass-2-blur: 14px;
+
+  /* Full-bleed rails start where the page container starts, not at the viewport. */
+  --rail-inset: max(
+    var(--spacing-gutter),
+    calc((100vw - var(--container-page)) / 2 + var(--spacing-gutter))
+  );
 
   --dur-1: 0.2s;
   --dur-2: 0.4s;

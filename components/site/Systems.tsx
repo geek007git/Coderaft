@@ -86,8 +86,8 @@ export default function Systems() {
                       <span
                         className="absolute top-1/2 -left-10 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rotate-45 transition-all duration-300 md:block"
                         style={{
-                          background: on ? "var(--color-accent)" : "var(--color-ink-5)",
-                          transform: `translate(-50%,-50%) rotate(45deg) scale(${on ? 1.5 : 1})`,
+                          background: on ? "var(--color-accent)" : "var(--color-ink-4)",
+                          scale: on ? "1.5" : "1",
                         }}
                         aria-hidden
                       />
@@ -174,7 +174,7 @@ export default function Systems() {
                   <span style={{ color: t.id === active.id ? "var(--color-accent)" : undefined }}>
                     {t.name.toUpperCase()}
                   </span>
-                  {i < tiers.length - 1 && <span className="text-ink-5">→</span>}
+                  {i < tiers.length - 1 && <span className="text-ink-4">→</span>}
                 </span>
               ))}
             </div>

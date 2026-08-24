@@ -123,7 +123,7 @@ export default function Hero() {
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-2">
             {heroDisciplines.map((d, i) => (
               <li key={d} className="label flex items-center gap-3">
-                <span className="text-ink-5">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-ink-4">{String(i + 1).padStart(2, "0")}</span>
                 {d}
               </li>
             ))}

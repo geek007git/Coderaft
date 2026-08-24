@@ -180,13 +180,17 @@ function Entry({ project }: { project: Project }) {
   return (
     <Reveal as="article" delay={0.04}>
       <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+        {/* Explicit placement on both columns — mixing `order` with `col-start`
+            in one grid makes auto-placement unpredictable. */}
         <div
-          className={`lg:col-span-7 ${visualFirst ? "lg:order-1" : "lg:order-2 lg:col-start-6"}`}
+          className={`lg:col-span-7 lg:row-start-1 ${visualFirst ? "lg:col-start-1" : "lg:col-start-6"}`}
         >
           <Visual id={project.id} name={project.name} />
         </div>
 
-        <div className={`lg:col-span-5 ${visualFirst ? "lg:order-2" : "lg:order-1 lg:row-start-1"}`}>
+        <div
+          className={`lg:col-span-5 lg:row-start-1 ${visualFirst ? "lg:col-start-8" : "lg:col-start-1"}`}
+        >
           {identity}
           <div className="mb-7">
             <Metrics metrics={project.metrics} />

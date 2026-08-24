@@ -39,14 +39,14 @@ export default function Method() {
         onScroll={onScroll}
         className="rail-x mt-20 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 lg:mt-28"
         style={{
-          paddingInline: "var(--spacing-gutter)",
-          scrollPaddingInline: "var(--spacing-gutter)",
+          paddingInline: "var(--rail-inset)",
+          scrollPaddingInline: "var(--rail-inset)",
         }}
       >
         {phases.map((phase, i) => (
           <article
             key={phase.index}
-            className="group relative w-[82vw] shrink-0 snap-start sm:w-[54vw] lg:w-[27rem]"
+            className="group relative flex w-[82vw] shrink-0 snap-start flex-col sm:w-[54vw] lg:w-[27rem]"
           >
             {/* Timeline edge */}
             <div className="mb-7 flex items-center gap-4">
@@ -55,7 +55,7 @@ export default function Method() {
               <span className="label">{phase.duration}</span>
             </div>
 
-            <div className="glass-2 h-full rounded-sm p-7 transition-colors duration-500 group-hover:border-[var(--color-line-2)]">
+            <div className="glass-2 flex-1 rounded-sm p-7 transition-colors duration-500 group-hover:border-[var(--color-line-2)]">
               <h3 className="display mb-4 text-[1.75rem] text-ink">{phase.name}</h3>
               <p className="mb-7 leading-relaxed text-ink-2">{phase.summary}</p>
 
