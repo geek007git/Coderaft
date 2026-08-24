@@ -4,7 +4,7 @@ import { principles, stackIndex, studio, studioStats } from "@/content/site";
 
 export default function Company() {
   return (
-    <section id="company" className="relative py-28 lg:py-40">
+    <section id="company" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="07"
@@ -12,16 +12,15 @@ export default function Company() {
           title={<>An engineering studio.</>}
           lead={
             <>
-              {studio.name} designs, builds, and operates software systems. We work across the stack
-              because the interesting failures happen between the layers — and someone has to own
-              the whole path.
+              {studio.name} designs, builds, and operates software systems — across the whole
+              stack, owning the whole path.
             </>
           }
         />
 
         {/* Studio figures */}
         <Reveal delay={0.08}>
-          <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden border border-line bg-[rgba(255,255,255,0.05)] lg:mt-20 lg:grid-cols-4">
+          <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden border border-line bg-[rgba(255,255,255,0.05)] lg:mt-12 lg:grid-cols-4">
             {studioStats.map((s) => (
               <div key={s.label} className="bg-[rgba(17,19,22,0.92)] px-6 py-8">
                 <dt className="label mb-3">{s.label}</dt>
@@ -32,7 +31,7 @@ export default function Company() {
         </Reveal>
 
         {/* Principles */}
-        <div className="mt-24 rail lg:mt-32">
+        <div className="mt-14 rail lg:mt-16">
           <Reveal from="left">
             <div className="flex items-baseline gap-3 md:flex-col md:gap-2">
               <span className="index-num">07.1</span>
@@ -54,7 +53,7 @@ export default function Company() {
         </div>
 
         {/* Stack index — dense technical counterpoint to the display type above */}
-        <div className="mt-24 rail lg:mt-32">
+        <div className="mt-14 rail lg:mt-16">
           <Reveal from="left">
             <div className="flex items-baseline gap-3 md:flex-col md:gap-2">
               <span className="index-num">07.2</span>

@@ -17,13 +17,13 @@ export default function Method() {
   };
 
   return (
-    <section id="method" className="relative py-28 lg:py-40">
+    <section id="method" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="05"
           label="Method"
           title={<>Six phases, in order.</>}
-          lead="The sequence rarely changes, because the expensive mistakes are always made early. Notes below are the studio's own, written after the projects shipped."
+          lead="The expensive mistakes are made early — so the sequence never changes."
           aside={
             <div className="mono text-sm text-ink-3">
               <div className="text-ink">~9 weeks</div>
@@ -37,7 +37,7 @@ export default function Method() {
       <div
         ref={railRef}
         onScroll={onScroll}
-        className="rail-x mt-20 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 lg:mt-28"
+        className="rail-x mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 lg:mt-14"
         style={{
           paddingInline: "var(--rail-inset)",
           scrollPaddingInline: "var(--rail-inset)",
@@ -86,7 +86,7 @@ export default function Method() {
       </div>
 
       {/* Rail position */}
-      <div className="page mt-8">
+      <div className="page mt-6">
         <Reveal>
           <div className="flex items-center gap-5">
             <div className="h-px flex-1 bg-line">

@@ -11,16 +11,16 @@ import { engagements } from "@/content/site";
  */
 export default function Engagements() {
   return (
-    <section id="engagements" className="relative py-28 lg:py-40">
+    <section id="engagements" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="06"
           label="Engagements"
           title={<>Two ways in.</>}
-          lead="The standard is the same in both. What changes is the scale of the system and the length of the relationship."
+          lead="Same standard in both. Only the scale and the length of the relationship change."
         />
 
-        <div className="mt-20 lg:mt-28">
+        <div className="mt-10 lg:mt-14">
           {engagements.map((eng, i) => {
             const mirrored = i % 2 === 1;
             const cols = mirrored
@@ -29,7 +29,7 @@ export default function Engagements() {
 
             return (
               <Reveal key={eng.id} as="article" delay={i * 0.06}>
-                <div className="grid items-start gap-10 border-t border-line py-14 lg:grid-cols-12 lg:gap-14 lg:py-20">
+                <div className="grid items-start gap-8 border-t border-line py-10 lg:grid-cols-12 lg:gap-14 lg:py-12">
                   {/* Oversized index letter */}
                   <div className={`lg:col-span-2 lg:row-start-1 ${cols.mark}`}>
                     <span

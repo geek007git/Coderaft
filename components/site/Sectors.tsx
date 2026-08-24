@@ -32,16 +32,16 @@ export default function Sectors() {
   const active = sectors.find((s) => s.id === activeId) ?? sectors[0];
 
   return (
-    <section id="sectors" className="relative py-28 lg:py-40">
+    <section id="sectors" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="04"
           label="Sectors"
           title={<>Where the work lands.</>}
-          lead="The engineering is the same discipline everywhere. What changes is the failure that matters most — a rounding error, a dropped record, an hour of downtime."
+          lead="The discipline is the same everywhere. What changes is the failure that matters most."
         />
 
-        <div className="mt-20 grid gap-14 lg:mt-28 lg:grid-cols-12 lg:gap-16">
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-16">
           {/* The typographic index */}
           <div className="lg:col-span-7">
             <ul className="flex flex-wrap items-baseline gap-x-6 gap-y-1">

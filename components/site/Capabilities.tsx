@@ -56,19 +56,19 @@ const glyphs: Record<string, ReactNode> = {
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="relative py-28 lg:py-40">
+    <section id="capabilities" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="02"
           label="Capabilities"
           title={<>Four practices, one team.</>}
-          lead="We are not a collection of specialists handing work across a wall. The people who design the system are the people who operate it."
+          lead="The people who design the system are the people who operate it. No handoffs, no walls."
         />
 
-        <div className="mt-20 lg:mt-28">
+        <div className="mt-10 lg:mt-14">
           {capabilities.map((cap, i) => (
             <Reveal key={cap.id} as="article" delay={i * 0.05}>
-              <div className="group grid gap-8 border-t border-line py-12 transition-colors duration-500 hover:border-line-3 lg:grid-cols-12 lg:gap-10 lg:py-16">
+              <div className="group grid gap-6 border-t border-line py-8 transition-colors duration-500 hover:border-line-3 lg:grid-cols-12 lg:gap-10 lg:py-10">
                 {/* Index + glyph */}
                 <div className="flex items-start gap-6 lg:col-span-3 lg:flex-col lg:gap-8">
                   <span className="index-num pt-1">{cap.index}</span>

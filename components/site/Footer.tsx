@@ -16,10 +16,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-line pt-20 pb-10">
+    <footer className="relative border-t border-line pt-14 pb-8">
       <div className="page">
         {/* Wordmark as a closing statement */}
-        <div className="mb-20 overflow-hidden">
+        <div className="mb-12 overflow-hidden">
           <span
             className="display block leading-[0.8] text-ink"
             style={{ fontSize: "clamp(3.5rem, 17vw, 17rem)", letterSpacing: "-0.05em" }}
@@ -28,7 +28,7 @@ export default function Footer() {
           </span>
         </div>
 
-        <div className="grid gap-12 border-t border-line pt-12 lg:grid-cols-12">
+        <div className="grid gap-10 border-t border-line pt-10 lg:grid-cols-12">
           {/* Studio */}
           <div className="lg:col-span-4">
             <p className="label mb-5">{studio.role}</p>
@@ -82,7 +82,7 @@ export default function Footer() {
         </div>
 
         {/* Colophon */}
-        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="label">
             © {new Date().getFullYear()} {studio.name} — {studio.location}
           </p>

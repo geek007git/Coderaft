@@ -127,7 +127,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28 lg:py-40">
+    <section id="contact" className="relative py-16 lg:py-24">
       <div className="page">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           {/* Statement */}
@@ -144,9 +144,8 @@ export default function Contact() {
                 you are building.
               </h2>
 
-              <p className="prose-lead mb-10 max-w-[40ch]">
-                Send the problem, not a specification. We will come back within 24 hours with what we
-                think it takes — or tell you honestly if we are the wrong studio for it.
+              <p className="prose-lead mb-8 max-w-[40ch]">
+                Send the problem, not a specification. An engineer replies within 24 hours.
               </p>
 
               <div className="space-y-4 border-t border-line pt-8">

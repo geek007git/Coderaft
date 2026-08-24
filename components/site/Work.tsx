@@ -215,13 +215,13 @@ function Entry({ project }: { project: Project }) {
 
 export default function Work() {
   return (
-    <section id="work" className="relative py-28 lg:py-40">
+    <section id="work" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="01"
           label="Selected work"
           title={<>Systems in production.</>}
-          lead="Six of the systems we have designed, built, and continue to operate. Each one is described by what it does under load, not by what it promised at kickoff."
+          lead="Systems we designed, built, and still operate — measured by what they do under load."
           aside={
             <div className="mono text-sm text-ink-3">
               <div className="text-ink">{projects.length} shown</div>
@@ -230,7 +230,7 @@ export default function Work() {
           }
         />
 
-        <div className="mt-24 space-y-28 lg:mt-32 lg:space-y-40">
+        <div className="mt-12 space-y-16 lg:mt-16 lg:space-y-24">
           {projects.map((project) => (
             <Entry key={project.id} project={project} />
           ))}

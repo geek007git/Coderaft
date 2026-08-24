@@ -37,7 +37,7 @@ export default function SectionHead({ index, label, title, lead, aside }: Sectio
 
         {(lead || aside) && (
           <Reveal delay={0.08}>
-            <div className="mt-8 flex flex-col gap-8 border-t border-line pt-8 lg:flex-row lg:items-start lg:justify-between">
+            <div className="mt-6 flex flex-col gap-6 border-t border-line pt-6 lg:flex-row lg:items-start lg:justify-between">
               {lead && <p className="prose-lead max-w-[52ch]">{lead}</p>}
               {aside && <div className="shrink-0 lg:text-right">{aside}</div>}
             </div>

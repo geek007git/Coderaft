@@ -40,7 +40,7 @@ export default function Systems() {
   const active = tiers.find((t) => t.id === activeId) ?? tiers[0];
 
   return (
-    <section id="systems" className="relative py-28 lg:py-40">
+    <section id="systems" className="relative py-16 lg:py-24">
       {/* This movement sits on its own ground so the architecture reads as a plate */}
       <div
         className="absolute inset-0"
@@ -56,7 +56,7 @@ export default function Systems() {
           index="03"
           label="Systems"
           title={<>How a request moves.</>}
-          lead="Every platform we build resolves to the same seven tiers. The names change with the domain; the responsibilities do not. Select a tier to read what it owns."
+          lead="Every platform we build resolves to the same seven tiers. Select one to see what it owns."
           aside={
             <div className="mono text-sm">
               <div className="text-accent">7 tiers</div>
@@ -65,7 +65,7 @@ export default function Systems() {
           }
         />
 
-        <div className="mt-20 grid gap-12 lg:mt-28 lg:grid-cols-12 lg:gap-16">
+        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-16">
           {/* The path */}
           <div className="relative lg:col-span-7">
             <Spine />
@@ -167,7 +167,7 @@ export default function Systems() {
 
         {/* The path, stated plainly */}
         <Reveal delay={0.1}>
-          <div className="rail-x fade-edges mt-16 overflow-x-auto border-t border-line pt-5">
+          <div className="rail-x fade-edges mt-10 overflow-x-auto border-t border-line pt-5">
             <div className="mono flex items-center gap-3 whitespace-nowrap text-[0.72rem] text-ink-4">
               {tiers.map((t, i) => (
                 <span key={t.id} className="flex items-center gap-3">
