@@ -50,11 +50,11 @@
   --text-d3: clamp(2rem, 4.4vw, 4rem);
   --text-d4: clamp(1.5rem, 2.6vw, 2.4rem);
 
-  /* ---- Radius: restrained. Premium reads sharp, not pill-shaped. --------- */
+  /* ---- Radius: restrained but soft-cornered — precise, never pill-shaped. - */
   --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 14px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
 
   /* ---- Motion ------------------------------------------------------------ */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -162,17 +162,18 @@ body {
    TYPOGRAPHY
    ========================================================================== */
 
-/* Display: tight, confident, optically corrected tracking. */
+/* Display: confident but composed — semibold weight, breathing line-height,
+   gently tightened tracking rather than compressed. */
 .display {
   font-family: var(--font-display);
-  font-weight: 750;
-  line-height: 0.88;
-  letter-spacing: -0.04em;
+  font-weight: 650;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
 .display-tight {
-  letter-spacing: -0.055em;
+  letter-spacing: -0.042em;
 }
 
 /* Editorial: the human voice — asides, notes, pull quotes. */
@@ -316,20 +317,19 @@ body {
   transform-origin: left;
 }
 
-/* Primary action — a matte light control. On hover the material warms toward
-   champagne rather than glowing. */
+/* Primary action — a matte light control, set quietly in the text face.
+   On hover the material warms toward champagne rather than glowing. */
 .action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.95rem 1.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: var(--radius-sm);
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-md);
   border: 1px solid transparent;
   background: var(--color-ink);
   color: var(--color-void);
@@ -357,13 +357,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.95rem 1.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: var(--radius-sm);
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-line-2);
   background: rgba(255, 255, 255, 0.02);
   color: var(--color-ink);

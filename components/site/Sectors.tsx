@@ -74,7 +74,7 @@ export default function Sectors() {
           {/* Preview */}
           <div className="lg:col-span-5">
             <Reveal from="right">
-              <div className="glass-2 rounded-sm p-7 lg:sticky lg:top-28">
+              <div className="glass-2 rounded-lg p-7 lg:sticky lg:top-28">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active.id}

@@ -47,7 +47,7 @@ export default function Hero() {
 
             {/* Live readout — primary glass, because it is a real control surface */}
             <motion.div
-              className="glass-1 glass-edge absolute right-0 bottom-2 hidden w-[15rem] rounded-sm p-4 lg:block"
+              className="glass-1 glass-edge absolute right-0 bottom-2 hidden w-[15rem] rounded-md p-4 lg:block"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}

@@ -180,7 +180,7 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="glass-1 glass-edge rounded-sm p-10 lg:p-14"
+                className="glass-1 glass-edge rounded-lg p-10 lg:p-14"
                 role="status"
               >
                 <span className="label label-accent mb-6 block">Received</span>

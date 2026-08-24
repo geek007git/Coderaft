@@ -122,7 +122,7 @@ export default function Systems() {
           {/* Detail — primary glass, because it is the panel you operate */}
           <div className="lg:col-span-5">
             <Reveal from="right">
-              <div className="glass-1 glass-edge rounded-sm p-7 lg:sticky lg:top-28 lg:p-8">
+              <div className="glass-1 glass-edge rounded-lg p-7 lg:sticky lg:top-28 lg:p-8">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active.id}
