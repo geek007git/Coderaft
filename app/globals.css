@@ -1,26 +1,488 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   CODERAFT — DESIGN TOKENS
+   One system. Every surface, type size, and transition resolves to a token here.
+   ========================================================================== */
+@theme {
+  /* ---- Surfaces: a near-black neutral ramp, faintly cool ------------------ */
+  --color-void: #07080a;
+  --color-base: #0a0b0e;
+  --color-raise: #0f1114;
+  --color-lift: #15181c;
+
+  /* ---- Ink: the text ramp ------------------------------------------------ */
+  --color-ink: #f4f6f7;
+  --color-ink-2: #b6bcc2;
+  --color-ink-3: #7e868e;
+  --color-ink-4: #545b63;
+  --color-ink-5: #363c43;
+
+  /* ---- Accent: used strategically, never decoratively -------------------- */
+  --color-accent: #23d18b;
+  --color-accent-hi: #5ee7ad;
+  --color-accent-dim: #0f6b48;
+
+  /* ---- Lines ------------------------------------------------------------- */
+  --color-line: rgba(255, 255, 255, 0.07);
+  --color-line-2: rgba(255, 255, 255, 0.12);
+  --color-line-3: rgba(255, 255, 255, 0.2);
+
+  /* ---- Type families ----------------------------------------------------- */
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-sans: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-editorial: var(--font-instrument), "Instrument Serif", Georgia, serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Fluid display scale ----------------------------------------------- */
+  --text-d1: clamp(3.2rem, 11vw, 12rem);
+  --text-d2: clamp(2.6rem, 7.2vw, 7rem);
+  --text-d3: clamp(2rem, 4.4vw, 4rem);
+  --text-d4: clamp(1.5rem, 2.6vw, 2.4rem);
+
+  /* ---- Radius: restrained. Premium reads sharp, not pill-shaped. --------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Layout ------------------------------------------------------------ */
+  --spacing-gutter: clamp(1.25rem, 4vw, 4rem);
+  --container-page: 1680px;
+}
+
+/* Non-utility tokens: consumed by the CSS below and by inline styles. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Glass levels. Level 1 is the most present; clear surfaces use none. */
+  --glass-1-bg: rgba(255, 255, 255, 0.055);
+  --glass-1-blur: 26px;
+  --glass-2-bg: rgba(255, 255, 255, 0.03);
+  --glass-2-blur: 14px;
+
+  --dur-1: 0.2s;
+  --dur-2: 0.4s;
+  --dur-3: 0.7s;
+
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================================
+   BASE
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #04150d;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: #23272c;
+  border: 3px solid var(--color-void);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333940;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Skip link — visible only when focused. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  transform: translateY(-160%);
+  padding: 0.7rem 1.1rem;
+  background: var(--color-accent);
+  color: #04150d;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: transform var(--dur-1) var(--ease-out-quart);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+/* Display: tight, confident, optically corrected tracking. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.display-tight {
+  letter-spacing: -0.055em;
+}
+
+/* Editorial: the human voice — asides, notes, pull quotes. */
+.editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Technical: every number, label, path, and timestamp. */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 1;
+}
+
+/* The recurring small-caps technical label. */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+.label-accent {
+  color: var(--color-accent);
+}
+
+/* Section index, e.g. 02 */
+.index-num {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: var(--color-ink-4);
+}
+
+/* Body copy that should read long-form. */
+.prose-lead {
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--color-ink-2);
+  text-wrap: pretty;
+}
+
+/* ============================================================================
+   GLASS SYSTEM
+   Three levels. Glass is architectural — it frames, it does not decorate.
+   ========================================================================== */
+
+/* Level 1 — navigation, floating controls, primary interactive panels. */
+.glass-1 {
+  background: var(--glass-1-bg);
+  backdrop-filter: blur(var(--glass-1-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-1-blur)) saturate(160%);
+  border: 1px solid var(--color-line-2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 20px 50px -28px rgba(0, 0, 0, 0.9);
+}
+
+/* Level 2 — supporting information, technical metadata. */
+.glass-2 {
+  background: var(--glass-2-bg);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(130%);
+  border: 1px solid var(--color-line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* The lit top edge that makes glass read as a physical pane. */
+.glass-edge {
+  position: relative;
+}
+.glass-edge::before {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   STRUCTURE
+   ========================================================================== */
+.page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* The hairline that separates major movements of the page. */
+.rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-line-2), transparent 65%);
+}
+
+/* Editorial two-column: narrow technical rail + wide content. */
+.rail {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .rail {
+    grid-template-columns: minmax(140px, 200px) 1fr;
+  }
+}
+
+/* ============================================================================
+   INTERACTIVE
+   ========================================================================== */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-2) var(--ease-out-expo);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Primary action — solid accent, minimal chrome. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--color-accent);
+  color: #04150d;
+  cursor: pointer;
+  transition:
+    background var(--dur-1) ease,
+    transform var(--dur-1) var(--ease-out-quart);
+}
+.action:hover {
+  background: var(--color-accent-hi);
+}
+.action:active {
+  transform: translateY(1px);
+}
+.action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary action — a glass pane with a hairline. */
+.action-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-line-2);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-1) ease,
+    background var(--dur-1) ease,
+    color var(--dur-1) ease;
+}
+.action-ghost:hover {
+  border-color: var(--color-line-3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================================
+   FORM
+   Field-first: a hairline underline, no boxed chrome.
+   ========================================================================== */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-line-2);
+  border-radius: 0;
+  padding: 0.85rem 0;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  outline: none;
+  transition:
+    border-color var(--dur-1) ease,
+    background var(--dur-1) ease;
+}
+.field::placeholder {
+  color: var(--color-ink-5);
+}
+.field:hover {
+  border-bottom-color: var(--color-line-3);
+}
+.field:focus {
+  border-bottom-color: var(--color-accent);
+}
+.field:focus-visible {
+  outline: none;
+}
+select.field {
+  appearance: none;
+  cursor: pointer;
+}
+select.field option {
+  background: var(--color-raise);
+  color: var(--color-ink);
+}
+textarea.field {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   TEXTURE
+   ========================================================================== */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.028;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Horizontal rails: hide the bar, fade the edges. */
+.rail-x {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rail-x::-webkit-scrollbar {
+  display: none;
+}
+
+.fade-edges {
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+}
+
+/* ============================================================================
+   MOTION PRIMITIVES
+   ========================================================================== */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+.dash-flow {
+  stroke-dasharray: 4 8;
+  animation: dash-flow 30s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Outlined display word — an editorial counterweight to the solid weight. */
+.display-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-ink-4);
+  paint-order: stroke fill;
+}
+@supports not (-webkit-text-stroke: 1px black) {
+  .display-outline {
+    color: var(--color-ink-4);
+  }
+}
+
+/* A line of display type that wipes up into place. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
 }
