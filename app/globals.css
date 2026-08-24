@@ -497,6 +497,20 @@ textarea.field {
   }
 }
 
+/* Display line rendered in brushed champagne — the one lit phrase of the page.
+   Lit from above: highlight at the top, settling into the darker metal. */
+.display-metal {
+  background: linear-gradient(180deg, #f1e6c9 0%, #d8c7a0 55%, #8f805f 125%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not (-webkit-background-clip: text) {
+  .display-metal {
+    color: var(--color-accent);
+  }
+}
+
 /* Outlined display word — an editorial counterweight to the solid weight. */
 .display-outline {
   color: transparent;

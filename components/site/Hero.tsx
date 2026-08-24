@@ -5,9 +5,9 @@ import SystemStack from "@/components/visuals/SystemStack";
 import { heroDisciplines, studio } from "@/content/site";
 
 const HEADLINE = [
-  { text: "We engineer", outline: false },
-  { text: "software", outline: false },
-  { text: "that holds.", outline: true },
+  { text: "We engineer", metal: false },
+  { text: "software", metal: false },
+  { text: "that holds.", metal: true },
 ];
 
 export default function Hero() {
@@ -77,7 +77,7 @@ export default function Hero() {
               {HEADLINE.map((line, i) => (
                 <span key={line.text} className="line-mask">
                   <motion.span
-                    className={`block ${line.outline ? "display-outline" : ""}`}
+                    className={`block ${line.metal ? "display-metal" : ""}`}
                     initial={reduced ? undefined : { y: "108%" }}
                     animate={reduced ? undefined : { y: 0 }}
                     transition={{ duration: 1.1, delay: 0.25 + i * 0.11, ease: [0.16, 1, 0.3, 1] }}
