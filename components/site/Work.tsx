@@ -221,7 +221,7 @@ export default function Work() {
           index="01"
           label="Selected work"
           title={<>Systems in production.</>}
-          lead="Systems we designed, built, and still operate — measured by what they do under load."
+          lead="No mockups. No 'coming soon.' Production or it didn't happen."
           aside={
             <div className="mono text-sm text-ink-3">
               <div className="text-ink">{projects.length} shown</div>

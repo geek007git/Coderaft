@@ -308,7 +308,7 @@ export default function Contact() {
 
                   <div className="flex flex-wrap items-center justify-between gap-6 pt-8">
                     <p className="label max-w-[28ch] normal-case">
-                      No newsletter, no sales sequence. One reply from an engineer.
+                      No newsletter. No sales call. One engineer, one reply.
                     </p>
                     <button type="submit" disabled={sending} className="action">
                       {sending ? "Sending…" : "Send brief"}

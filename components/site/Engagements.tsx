@@ -17,7 +17,7 @@ export default function Engagements() {
           index="06"
           label="Engagements"
           title={<>Two ways in.</>}
-          lead="Same standard in both. Only the scale and the length of the relationship change."
+          lead="Your final-year project gets the same code review a bank would."
         />
 
         <div className="mt-10 lg:mt-14">

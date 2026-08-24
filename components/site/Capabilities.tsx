@@ -62,7 +62,7 @@ export default function Capabilities() {
           index="02"
           label="Capabilities"
           title={<>Four practices, one team.</>}
-          lead="The people who design the system are the people who operate it. No handoffs, no walls."
+          lead="The people who design it are the people on call for it. Incentives do the rest."
         />
 
         <div className="mt-10 lg:mt-14">

@@ -543,7 +543,7 @@ export const phases: Phase[] = [
     summary:
       "We establish what the system must do, what it must never do, and which constraints are real.",
     outputs: ["Requirements", "Constraints", "Success criteria"],
-    note: "Most rewrites we are called in to do trace back to a requirement nobody wrote down.",
+    note: "Every rescue project we have ever taken started life as 'we'll figure that out later.'",
   },
   {
     index: "02",
@@ -552,7 +552,7 @@ export const phases: Phase[] = [
     summary:
       "Boundaries, data model, and failure modes are decided before any feature code is written.",
     outputs: ["System design", "Data model", "Interface contracts"],
-    note: "Drawing the failure cases first is faster than discovering them in staging.",
+    note: "Whiteboards are cheap. Outages are not.",
   },
   {
     index: "03",
@@ -579,7 +579,7 @@ export const phases: Phase[] = [
     summary:
       "Infrastructure as code, pipelines, monitoring, and alerting — shipped with the product, not after it.",
     outputs: ["Pipelines", "Infrastructure", "Dashboards"],
-    note: "If a deploy needs a person to remember a step, it is not finished.",
+    note: "If step four of the deploy is 'Dave remembers to press enter,' it is not finished.",
   },
   {
     index: "06",

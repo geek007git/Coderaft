@@ -33,8 +33,8 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <p className="label mb-5">{studio.role}</p>
             <p className="mb-8 max-w-[32ch] leading-relaxed text-ink-3">
-              We design, engineer, deploy, and operate software systems — and stay reachable after
-              handover.
+              We design, engineer, deploy, and operate software systems — and still answer the
+              phone in year three.
             </p>
             <a href={`mailto:${studio.email}`} className="mono link-underline text-sm text-ink">
               {studio.email}
