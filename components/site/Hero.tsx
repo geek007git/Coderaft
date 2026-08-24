@@ -77,7 +77,7 @@ export default function Hero() {
               {HEADLINE.map((line, i) => (
                 <span key={line.text} className="line-mask">
                   <motion.span
-                    className={`block ${line.metal ? "display-metal" : ""}`}
+                    className={line.metal ? "display-plate" : "block"}
                     initial={reduced ? undefined : { y: "108%" }}
                     animate={reduced ? undefined : { y: 0 }}
                     transition={{ duration: 1.1, delay: 0.25 + i * 0.11, ease: [0.16, 1, 0.3, 1] }}

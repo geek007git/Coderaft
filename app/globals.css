@@ -497,18 +497,15 @@ textarea.field {
   }
 }
 
-/* Display line rendered in brushed champagne — the one lit phrase of the page.
-   Lit from above: highlight at the top, settling into the darker metal. */
-.display-metal {
-  background: linear-gradient(180deg, #f1e6c9 0%, #d8c7a0 55%, #8f805f 125%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-@supports not (-webkit-background-clip: text) {
-  .display-metal {
-    color: var(--color-accent);
-  }
+/* Display line set on a champagne plate — dark ink on lit metal. The plate
+   hugs the text; the negative margin keeps the letters optically aligned
+   with the lines above. */
+.display-plate {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-void);
+  padding-inline: 0.1em;
+  margin-inline: -0.1em;
 }
 
 /* Outlined display word — an editorial counterweight to the solid weight. */
