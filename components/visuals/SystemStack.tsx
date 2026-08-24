@@ -223,7 +223,7 @@ export default function SystemStack({ className }: { className?: string }) {
           ctx.beginPath();
           ctx.moveTo(corners[3].x, corners[3].y);
           ctx.lineTo(corners[2].x, corners[2].y);
-          ctx.strokeStyle = `rgba(35,209,139,${heat * 0.75})`;
+          ctx.strokeStyle = `rgba(216,199,160,${heat * 0.8})`;
           ctx.lineWidth = 1.4;
           ctx.stroke();
         }
@@ -267,13 +267,13 @@ export default function SystemStack({ className }: { className?: string }) {
           // Footprint on the plate
           ctx.beginPath();
           ctx.ellipse(p.x, p.y, size * 1.5, size * 1.5 * TILT, 0, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(35,209,139,${0.05 + heat * 0.12})`;
+          ctx.fillStyle = `rgba(154,167,173,${0.05 + heat * 0.1})`;
           ctx.fill();
 
           // Body
           ctx.beginPath();
           ctx.ellipse(p.x, p.y, size * 0.5, size * 0.5 * TILT + 1, 0, 0, Math.PI * 2);
-          ctx.fillStyle = heat > 0.4 ? "#5ee7ad" : "rgba(244,246,247,0.72)";
+          ctx.fillStyle = heat > 0.4 ? "#f1e6c9" : "rgba(241,240,235,0.72)";
           ctx.fill();
         });
 
@@ -281,7 +281,7 @@ export default function SystemStack({ className }: { className?: string }) {
         const anchor = project(-PLATE_W / 2 - 22, plate.y, PLATE_D / 2, scale);
         ctx.font = `500 10px ${monoFamily}, ui-monospace, monospace`;
         ctx.textAlign = "right";
-        ctx.fillStyle = heat > 0.4 ? "rgba(94,231,173,0.95)" : "rgba(126,134,142,0.75)";
+        ctx.fillStyle = heat > 0.4 ? "rgba(216,199,160,0.95)" : "rgba(138,142,139,0.75)";
         ctx.fillText(plate.label, anchor.x, anchor.y);
       });
 
@@ -308,8 +308,8 @@ export default function SystemStack({ className }: { className?: string }) {
         const tx = pa.x + (pb.x - pa.x) * tt;
         const ty = pa.y + (pb.y - pa.y) * tt;
         const trail = ctx.createLinearGradient(tx, ty, px, py);
-        trail.addColorStop(0, "rgba(35,209,139,0)");
-        trail.addColorStop(1, "rgba(35,209,139,0.85)");
+        trail.addColorStop(0, "rgba(154,167,173,0)");
+        trail.addColorStop(1, "rgba(154,167,173,0.8)");
         ctx.beginPath();
         ctx.moveTo(tx, ty);
         ctx.lineTo(px, py);
@@ -321,7 +321,7 @@ export default function SystemStack({ className }: { className?: string }) {
         // Head
         ctx.beginPath();
         ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-        ctx.fillStyle = "#8df7c6";
+        ctx.fillStyle = "#c9d3d8";
         ctx.fill();
       });
 

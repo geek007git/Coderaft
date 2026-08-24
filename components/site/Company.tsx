@@ -23,7 +23,7 @@ export default function Company() {
         <Reveal delay={0.08}>
           <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden border border-line bg-[rgba(255,255,255,0.05)] lg:mt-20 lg:grid-cols-4">
             {studioStats.map((s) => (
-              <div key={s.label} className="bg-[rgba(10,11,14,0.9)] px-6 py-8">
+              <div key={s.label} className="bg-[rgba(17,19,22,0.92)] px-6 py-8">
                 <dt className="label mb-3">{s.label}</dt>
                 <dd className="display text-[2.2rem] text-ink lg:text-[2.8rem]">{s.value}</dd>
               </div>

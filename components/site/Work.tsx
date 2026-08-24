@@ -25,7 +25,7 @@ function Metrics({ metrics }: { metrics: Project["metrics"] }) {
   return (
     <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-sm border border-line bg-[rgba(255,255,255,0.05)]">
       {metrics.map((m) => (
-        <div key={m.label} className="bg-[rgba(10,11,14,0.86)] px-3 py-4">
+        <div key={m.label} className="bg-[rgba(17,19,22,0.88)] px-3 py-4">
           <dt className="label mb-2 text-[0.6rem]">{m.label}</dt>
           <dd className="mono text-lg text-ink lg:text-xl">{m.value}</dd>
         </div>
@@ -38,7 +38,7 @@ function Metrics({ metrics }: { metrics: Project["metrics"] }) {
 function Visual({ id, name }: { id: string; name: string }) {
   const Render = projectVisuals[id];
   return (
-    <div className="group/vis relative aspect-[8/5] w-full overflow-hidden rounded-sm border border-line bg-[rgba(10,11,14,0.7)]">
+    <div className="group/vis relative aspect-[8/5] w-full overflow-hidden rounded-sm border border-line bg-[rgba(11,12,14,0.75)]">
       <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/vis:scale-[1.025]">
         {Render ? <Render /> : null}
       </div>
@@ -79,7 +79,7 @@ function CaseStudy({ project }: { project: Project }) {
           <h4 className="label mb-3">Outcome</h4>
           <p className="text-sm leading-relaxed text-ink-2">{project.outcome}</p>
         </div>
-        <div className="border-l-2 border-accent pl-5">
+        <div className="border-l-2 border-accent-dim pl-5">
           <h4 className="label mb-3">Engineering note</h4>
           <p className="editorial text-base leading-relaxed text-ink-2">{project.note}</p>
         </div>

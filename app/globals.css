@@ -3,30 +3,40 @@
 /* ============================================================================
    CODERAFT — DESIGN TOKENS
    One system. Every surface, type size, and transition resolves to a token here.
+
+   Material order, bottom to top:
+   background → matte surface → glass → content → metal accent.
+   Champagne is machined metal, not branding — it carries active states, key
+   metadata, and lit edges. Steel carries diagrams, traces, and data flow.
    ========================================================================== */
 @theme {
-  /* ---- Surfaces: a near-black neutral ramp, faintly cool ------------------ */
-  --color-void: #07080a;
-  --color-base: #0a0b0e;
-  --color-raise: #0f1114;
-  --color-lift: #15181c;
+  /* ---- Surfaces: a matte graphite ramp, warm-neutral, never pure black ---- */
+  --color-void: #0b0c0e;
+  --color-base: #111316;
+  --color-raise: #17191c;
+  --color-lift: #1d2024;
 
-  /* ---- Ink: the text ramp ------------------------------------------------ */
-  --color-ink: #f4f6f7;
-  --color-ink-2: #b6bcc2;
-  --color-ink-3: #7e868e;
-  --color-ink-4: #717983;
-  --color-ink-5: #575d65;
+  /* ---- Ink: warm off-white settling into graphite -------------------------- */
+  --color-ink: #f1f0eb;
+  --color-ink-2: #a8aaa8;
+  --color-ink-3: #8a8e8b;
+  --color-ink-4: #6f7273;
+  --color-ink-5: #55585a;
 
-  /* ---- Accent: used strategically, never decoratively -------------------- */
-  --color-accent: #23d18b;
-  --color-accent-hi: #5ee7ad;
-  --color-accent-dim: #0f6b48;
+  /* ---- Accent: champagne metal. Active states and small highlights only. -- */
+  --color-accent: #d8c7a0;
+  --color-accent-hi: #f1e6c9;
+  --color-accent-dim: #8f805f;
 
-  /* ---- Lines ------------------------------------------------------------- */
-  --color-line: rgba(255, 255, 255, 0.07);
+  /* ---- Steel: the cooler second metal — engineering surfaces -------------- */
+  --color-steel: #9aa7ad;
+  --color-steel-dim: #5f6a70;
+
+  /* ---- Lines --------------------------------------------------------------- */
+  --color-line: rgba(255, 255, 255, 0.08);
   --color-line-2: rgba(255, 255, 255, 0.12);
   --color-line-3: rgba(255, 255, 255, 0.2);
+  --color-line-metal: rgba(216, 199, 160, 0.3);
 
   /* ---- Type families ----------------------------------------------------- */
   --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
@@ -58,11 +68,16 @@
 
 /* Non-utility tokens: consumed by the CSS below and by inline styles. */
 :root {
-  /* Glass levels. Level 1 is the most present; clear surfaces use none. */
-  --glass-1-bg: rgba(255, 255, 255, 0.055);
-  --glass-1-blur: 26px;
-  --glass-2-bg: rgba(255, 255, 255, 0.03);
-  --glass-2-blur: 14px;
+  /* Glass levels. Level 1 is the most present; clear surfaces use none.
+     Smoked architectural glass: low opacity, restrained blur, a lit top edge. */
+  --glass-1-bg: rgba(255, 255, 255, 0.045);
+  --glass-1-blur: 22px;
+  --glass-2-bg: rgba(255, 255, 255, 0.025);
+  --glass-2-blur: 12px;
+
+  /* Elevation is layered, not decorated: a contact line, then ambient fall-off. */
+  --shadow-contact: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-ambient: 0 24px 48px -28px rgba(0, 0, 0, 0.6);
 
   /* Full-bleed rails start where the page container starts, not at the viewport. */
   --rail-inset: max(
@@ -98,7 +113,7 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: #04150d;
+  color: var(--color-void);
 }
 
 ::-webkit-scrollbar {
@@ -109,12 +124,12 @@ body {
   background: var(--color-void);
 }
 ::-webkit-scrollbar-thumb {
-  background: #23272c;
+  background: var(--color-lift);
   border: 3px solid var(--color-void);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #333940;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 :focus-visible {
@@ -131,7 +146,7 @@ body {
   transform: translateY(-160%);
   padding: 0.7rem 1.1rem;
   background: var(--color-accent);
-  color: #04150d;
+  color: var(--color-void);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
@@ -150,7 +165,7 @@ body {
 /* Display: tight, confident, optically corrected tracking. */
 .display {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 750;
   line-height: 0.88;
   letter-spacing: -0.04em;
   text-wrap: balance;
@@ -188,6 +203,10 @@ body {
   color: var(--color-accent);
 }
 
+.label-steel {
+  color: var(--color-steel);
+}
+
 /* Section index, e.g. 02 */
 .index-num {
   font-family: var(--font-mono);
@@ -212,24 +231,26 @@ body {
 /* Level 1 — navigation, floating controls, primary interactive panels. */
 .glass-1 {
   background: var(--glass-1-bg);
-  backdrop-filter: blur(var(--glass-1-blur)) saturate(160%);
-  -webkit-backdrop-filter: blur(var(--glass-1-blur)) saturate(160%);
+  backdrop-filter: blur(var(--glass-1-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-1-blur)) saturate(140%);
   border: 1px solid var(--color-line-2);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.13),
-    0 20px 50px -28px rgba(0, 0, 0, 0.9);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    var(--shadow-contact),
+    var(--shadow-ambient);
 }
 
 /* Level 2 — supporting information, technical metadata. */
 .glass-2 {
   background: var(--glass-2-bg);
-  backdrop-filter: blur(var(--glass-2-blur)) saturate(130%);
-  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(130%);
+  backdrop-filter: blur(var(--glass-2-blur)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--glass-2-blur)) saturate(120%);
   border: 1px solid var(--color-line);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* The lit top edge that makes glass read as a physical pane. */
+/* The lit top edge that makes glass read as a physical pane — the light in the
+   room is warm, so the catch is faintly champagne. */
 .glass-edge {
   position: relative;
 }
@@ -239,7 +260,7 @@ body {
   inset-inline: 12%;
   top: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(241, 230, 201, 0.38), transparent);
   pointer-events: none;
 }
 
@@ -295,7 +316,8 @@ body {
   transform-origin: left;
 }
 
-/* Primary action — solid accent, minimal chrome. */
+/* Primary action — a matte light control. On hover the material warms toward
+   champagne rather than glowing. */
 .action {
   display: inline-flex;
   align-items: center;
@@ -309,9 +331,10 @@ body {
   text-transform: uppercase;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
-  background: var(--color-accent);
-  color: #04150d;
+  background: var(--color-ink);
+  color: var(--color-void);
   cursor: pointer;
+  box-shadow: var(--shadow-contact);
   transition:
     background var(--dur-1) ease,
     transform var(--dur-1) var(--ease-out-quart);
@@ -327,7 +350,8 @@ body {
   cursor: not-allowed;
 }
 
-/* Secondary action — a glass pane with a hairline. */
+/* Secondary action — a glass pane with a hairline. The hover edge picks up
+   the warm light instead of brightening to white. */
 .action-ghost {
   display: inline-flex;
   align-items: center;
@@ -350,8 +374,8 @@ body {
     color var(--dur-1) ease;
 }
 .action-ghost:hover {
-  border-color: var(--color-line-3);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-line-metal);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* ============================================================================

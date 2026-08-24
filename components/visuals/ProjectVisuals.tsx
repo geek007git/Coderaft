@@ -12,10 +12,11 @@ import type { ReactNode } from "react";
 /** Round generated coordinates so server and client serialise them identically. */
 const r2 = (n: number) => Math.round(n * 100) / 100;
 
-const INK = "rgba(244,246,247,";
+const INK = "rgba(241,240,235,";
 const LINE = "rgba(255,255,255,0.1)";
 const LINE_SOFT = "rgba(255,255,255,0.055)";
-const ACCENT = "#23d18b";
+const METAL = "#d8c7a0";
+const STEEL = "#9aa7ad";
 
 const VIEWBOX = "0 0 800 500";
 
@@ -115,7 +116,7 @@ export function HealthSyncVisual() {
       </text>
       {[0, 1, 2, 3, 4, 5, 6].map((i) => (
         <g key={i}>
-          {i === 2 && <rect x="12" y={72 + i * 46} width="176" height="38" rx="3" fill="rgba(35,209,139,0.09)" />}
+          {i === 2 && <rect x="12" y={72 + i * 46} width="176" height="38" rx="3" fill="rgba(216,199,160,0.08)" />}
           <circle cx="30" cy={91 + i * 46} r="9" fill={`${INK}${i === 2 ? 0.2 : 0.09})`} />
           <Lines x={48} y={84 + i * 46} widths={[i === 2 ? 82 : 64, 44]} gap={11} h={4} opacity={i === 2 ? 0.28 : 0.12} />
           <line x1="12" y1={118 + i * 46} x2="188" y2={118 + i * 46} stroke={LINE_SOFT} />
@@ -171,15 +172,15 @@ export function HealthSyncVisual() {
             width={colW - 10}
             height={a.span * rowH - 8}
             rx="3"
-            fill={a.live ? "rgba(35,209,139,0.2)" : "rgba(255,255,255,0.07)"}
-            stroke={a.live ? ACCENT : LINE}
+            fill={a.live ? "rgba(216,199,160,0.16)" : "rgba(255,255,255,0.07)"}
+            stroke={a.live ? METAL : LINE}
           />
           <rect
             x={gridX + a.d * colW + 4}
             y={gridY + a.start * rowH + 4}
             width="2.5"
             height={a.span * rowH - 8}
-            fill={a.live ? ACCENT : `${INK}0.22)`}
+            fill={a.live ? METAL : `${INK}0.22)`}
           />
           <Lines
             x={gridX + a.d * colW + 14}
@@ -206,11 +207,11 @@ export function HealthSyncVisual() {
       </text>
       <polyline
         points="640,168 656,158 672,164 688,144 704,152 720,132 736,140 752,124 768,130"
-        stroke={ACCENT}
+        stroke={STEEL}
         strokeWidth="1.5"
         fill="none"
       />
-      <circle cx="768" cy="130" r="2.5" fill={ACCENT} />
+      <circle cx="768" cy="130" r="2.5" fill={STEEL} />
 
       {[0, 1, 2, 3].map((i) => (
         <g key={i}>
@@ -220,8 +221,8 @@ export function HealthSyncVisual() {
         </g>
       ))}
 
-      <rect x="640" y="404" width="140" height="26" rx="3" fill="rgba(35,209,139,0.16)" stroke={ACCENT} />
-      <text x="710" y="421" fontSize="8.5" fill={ACCENT} fontFamily="monospace" textAnchor="middle" letterSpacing="1">
+      <rect x="640" y="404" width="140" height="26" rx="3" fill="rgba(216,199,160,0.14)" stroke={METAL} />
+      <text x="710" y="421" fontSize="8.5" fill={METAL} fontFamily="monospace" textAnchor="middle" letterSpacing="1">
         CONFIRM VISIT
       </text>
     </Frame>
@@ -268,7 +269,7 @@ export function FinFlowVisual() {
           <text x={56 + i * 182} y="96" fontSize="21" fill={`${INK}0.9)`} fontFamily="monospace">
             {m.v}
           </text>
-          <text x={56 + i * 182 + 62} y="96" fontSize="8" fill={i === 2 ? ACCENT : `${INK}0.32)`} fontFamily="monospace">
+          <text x={56 + i * 182 + 62} y="96" fontSize="8" fill={i === 2 ? METAL : `${INK}0.32)`} fontFamily="monospace">
             {m.d}
           </text>
         </g>
@@ -287,12 +288,12 @@ export function FinFlowVisual() {
 
       <defs>
         <linearGradient id="ff-area" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={ACCENT} stopOpacity="0.22" />
-          <stop offset="100%" stopColor={ACCENT} stopOpacity="0" />
+          <stop offset="0%" stopColor={STEEL} stopOpacity="0.18" />
+          <stop offset="100%" stopColor={STEEL} stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={area} fill="url(#ff-area)" />
-      <path d={path} stroke={ACCENT} strokeWidth="1.6" fill="none" />
+      <path d={path} stroke={STEEL} strokeWidth="1.6" fill="none" />
 
       {/* Anomaly markers */}
       {ANOMALIES.map((i) => (
@@ -302,7 +303,7 @@ export function FinFlowVisual() {
             y1="150"
             x2={r2(x0 + i * stepX)}
             y2="300"
-            stroke="rgba(244,246,247,0.22)"
+            stroke="rgba(241,240,235,0.22)"
             strokeDasharray="2 4"
           />
           <rect
@@ -336,8 +337,8 @@ export function FinFlowVisual() {
             width={i === 1 ? 54 : 42}
             height="13"
             rx="2"
-            fill={i === 1 ? "rgba(35,209,139,0.16)" : "rgba(255,255,255,0.05)"}
-            stroke={i === 1 ? ACCENT : LINE}
+            fill={i === 1 ? "rgba(216,199,160,0.14)" : "rgba(255,255,255,0.05)"}
+            stroke={i === 1 ? METAL : LINE}
           />
           <text x="660" y={r2(388 + i * 30)} fontSize="8.5" fill={`${INK}0.55)`} fontFamily="monospace" textAnchor="end">
             {["₹ 41,220", "₹ 8,905", "₹ 132,400", "₹ 2,310"][i]}
@@ -378,14 +379,14 @@ export function SecureVaultVisual() {
             width="98"
             height="40"
             rx="3"
-            fill={i === 1 ? "rgba(35,209,139,0.12)" : "rgba(255,255,255,0.035)"}
-            stroke={i === 1 ? ACCENT : LINE}
+            fill={i === 1 ? "rgba(216,199,160,0.1)" : "rgba(255,255,255,0.035)"}
+            stroke={i === 1 ? METAL : LINE}
           />
           <text
             x={89 + i * 122}
             y="101"
             fontSize="8.5"
-            fill={i === 1 ? ACCENT : `${INK}0.5)`}
+            fill={i === 1 ? METAL : `${INK}0.5)`}
             fontFamily="monospace"
             textAnchor="middle"
             letterSpacing="1"
@@ -422,7 +423,7 @@ export function SecureVaultVisual() {
             width={r2(200 * m.pct)}
             height="6"
             rx="3"
-            fill={m.pct > 0.8 ? `${INK}0.75)` : ACCENT}
+            fill={m.pct > 0.8 ? `${INK}0.75)` : STEEL}
           />
           <text x="762" y={r2(92 + i * 46)} fontSize="8" fill={`${INK}0.35)`} fontFamily="monospace" textAnchor="end">
             {Math.round(m.pct * 100)}%
@@ -443,9 +444,9 @@ export function SecureVaultVisual() {
             width="480"
             height="34"
             rx="2"
-            fill={i === 2 ? "rgba(244,246,247,0.045)" : "transparent"}
+            fill={i === 2 ? "rgba(241,240,235,0.045)" : "transparent"}
           />
-          <rect x="30" y={r2(184 + i * 44)} width="2" height="34" fill={rq.ok ? ACCENT : `${INK}0.4)`} />
+          <rect x="30" y={r2(184 + i * 44)} width="2" height="34" fill={rq.ok ? STEEL : `${INK}0.4)`} />
           <text x="46" y={r2(205 + i * 44)} fontSize="9" fill={`${INK}0.62)`} fontFamily="monospace">
             {rq.path}
           </text>
@@ -453,7 +454,7 @@ export function SecureVaultVisual() {
             x="440"
             y={r2(205 + i * 44)}
             fontSize="9"
-            fill={rq.ok ? ACCENT : `${INK}0.75)`}
+            fill={rq.ok ? STEEL : `${INK}0.75)`}
             fontFamily="monospace"
           >
             {rq.code}
@@ -482,7 +483,7 @@ export function SecureVaultVisual() {
           y={r2(340 + (i % 7) * 3)}
           width="3"
           height={r2(40 - (i % 7) * 3)}
-          fill={i % 9 === 0 ? ACCENT : `${INK}0.14)`}
+          fill={i % 9 === 0 ? STEEL : `${INK}0.14)`}
         />
       ))}
     </Frame>
@@ -513,7 +514,7 @@ export function CloudOpsVisual() {
             cx="34"
             cy="34"
             r="26"
-            stroke={ACCENT}
+            stroke={STEEL}
             strokeWidth="5"
             fill="none"
             strokeLinecap="round"
@@ -537,7 +538,7 @@ export function CloudOpsVisual() {
       <text x="446" y="98" fontSize="26" fill={`${INK}0.9)`} fontFamily="monospace">
         $18,240
       </text>
-      <text x="446" y="118" fontSize="8.5" fill={ACCENT} fontFamily="monospace">
+      <text x="446" y="118" fontSize="8.5" fill={METAL} fontFamily="monospace">
         ↓ 31% vs. previous
       </text>
       {Array.from({ length: 30 }, (_, i) => {
@@ -549,7 +550,7 @@ export function CloudOpsVisual() {
             y={r2(128 - h)}
             width="3.4"
             height={h}
-            fill={i > 20 ? ACCENT : `${INK}0.16)`}
+            fill={i > 20 ? STEEL : `${INK}0.16)`}
           />
         );
       })}
@@ -573,10 +574,10 @@ export function CloudOpsVisual() {
               rx="2"
               fill={
                 state === "warn"
-                  ? "rgba(244,246,247,0.55)"
+                  ? "rgba(241,240,235,0.55)"
                   : state === "hot"
-                    ? "rgba(35,209,139,0.5)"
-                    : "rgba(35,209,139,0.14)"
+                    ? "rgba(154,167,173,0.5)"
+                    : "rgba(154,167,173,0.14)"
               }
               stroke={state === "warn" ? `${INK}0.7)` : "transparent"}
             />
@@ -591,7 +592,7 @@ export function CloudOpsVisual() {
       </text>
       {["api-gateway", "ledger-svc", "worker-pool", "web", "search-idx"].map((s, i) => (
         <g key={s}>
-          <circle cx="530" cy={r2(216 + i * 42)} r="3.5" fill={i === 0 ? ACCENT : `${INK}0.25)`} />
+          <circle cx="530" cy={r2(216 + i * 42)} r="3.5" fill={i === 0 ? METAL : `${INK}0.25)`} />
           {i < 4 && <line x1="530" y1={r2(220 + i * 42)} x2="530" y2={r2(254 + i * 42)} stroke={LINE_SOFT} />}
           <text x="548" y={r2(213 + i * 42)} fontSize="9" fill={`${INK}0.6)`} fontFamily="monospace">
             {s}
@@ -605,7 +606,7 @@ export function CloudOpsVisual() {
             width="36"
             height="14"
             rx="2"
-            fill={i === 0 ? "rgba(35,209,139,0.16)" : "rgba(255,255,255,0.04)"}
+            fill={i === 0 ? "rgba(216,199,160,0.14)" : "rgba(255,255,255,0.04)"}
           />
         </g>
       ))}
@@ -628,28 +629,28 @@ export function EduTrackVisual() {
       </text>
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <g key={i}>
-          {i === 1 && <rect x="20" y={r2(74 + i * 44)} width="200" height="36" rx="3" fill="rgba(35,209,139,0.09)" />}
+          {i === 1 && <rect x="20" y={r2(74 + i * 44)} width="200" height="36" rx="3" fill="rgba(216,199,160,0.08)" />}
           <text x="34" y={r2(90 + i * 44)} fontSize="8" fill={`${INK}0.28)`} fontFamily="monospace">
             {String(i + 1).padStart(2, "0")}
           </text>
           <Lines x={58} y={r2(83 + i * 44)} widths={[i === 1 ? 128 : 104, 62]} gap={11} h={4} opacity={i === 1 ? 0.3 : 0.12} />
-          <circle cx="206" cy={r2(92 + i * 44)} r="5" fill="none" stroke={i <= 1 ? ACCENT : LINE} strokeWidth="1.5" />
-          {i <= 1 && <path d={`M203,${r2(92 + i * 44)} l2.2,2.4 l4,-4.6`} stroke={ACCENT} strokeWidth="1.5" fill="none" />}
+          <circle cx="206" cy={r2(92 + i * 44)} r="5" fill="none" stroke={i <= 1 ? METAL : LINE} strokeWidth="1.5" />
+          {i <= 1 && <path d={`M203,${r2(92 + i * 44)} l2.2,2.4 l4,-4.6`} stroke={METAL} strokeWidth="1.5" fill="none" />}
         </g>
       ))}
 
       {/* Player */}
       <line x1="240" y1="34" x2="240" y2="500" stroke={LINE} />
       <rect x="264" y="60" width="352" height="198" rx="4" fill="rgba(255,255,255,0.035)" stroke={LINE} />
-      <circle cx="440" cy="152" r="24" fill="none" stroke={ACCENT} strokeWidth="1.5" />
-      <path d="M433,142 L456,152 L433,162 Z" fill={ACCENT} />
+      <circle cx="440" cy="152" r="24" fill="none" stroke={STEEL} strokeWidth="1.5" />
+      <path d="M433,142 L456,152 L433,162 Z" fill={STEEL} />
       <rect x="264" y="244" width="352" height="3" fill="rgba(255,255,255,0.09)" />
-      <rect x="264" y="244" width="148" height="3" fill={ACCENT} />
-      <circle cx="412" cy="245.5" r="4" fill={ACCENT} />
+      <rect x="264" y="244" width="148" height="3" fill={STEEL} />
+      <circle cx="412" cy="245.5" r="4" fill={STEEL} />
       <text x="264" y="274" fontSize="8" fill={`${INK}0.34)`} fontFamily="monospace">
         18:42 / 44:10
       </text>
-      <text x="616" y="274" fontSize="8" fill={ACCENT} fontFamily="monospace" textAnchor="end">
+      <text x="616" y="274" fontSize="8" fill={METAL} fontFamily="monospace" textAnchor="end">
         ● LIVE · 312 WATCHING
       </text>
 
@@ -668,7 +669,7 @@ export function EduTrackVisual() {
             width="8"
             height={h}
             rx="1.5"
-            fill={h > 55 ? ACCENT : `${INK}0.15)`}
+            fill={h > 55 ? STEEL : `${INK}0.15)`}
           />
         );
       })}
@@ -734,14 +735,14 @@ export function ShopStreamVisual() {
           cx={p.x}
           cy={p.y}
           r={p.cluster === 0 ? 3 : 2}
-          fill={p.cluster === 0 ? ACCENT : `${INK}0.2)`}
+          fill={p.cluster === 0 ? STEEL : `${INK}0.2)`}
           opacity={p.cluster === 0 ? 0.95 : 0.7}
         />
       ))}
 
       {/* Query item and its nearest neighbours */}
-      <circle cx="300" cy="300" r="6" fill={ACCENT} />
-      <circle cx="300" cy="300" r="13" fill="none" stroke={ACCENT} strokeWidth="1" opacity="0.5" />
+      <circle cx="300" cy="300" r="6" fill={STEEL} />
+      <circle cx="300" cy="300" r="13" fill="none" stroke={STEEL} strokeWidth="1" opacity="0.5" />
       {[
         [376, 262],
         [232, 268],
@@ -749,8 +750,8 @@ export function ShopStreamVisual() {
         [246, 340],
       ].map(([x, y], i) => (
         <g key={i}>
-          <line x1="300" y1="300" x2={x} y2={y} stroke="rgba(35,209,139,0.4)" strokeWidth="1" />
-          <circle cx={x} cy={y} r="4" fill="none" stroke={ACCENT} strokeWidth="1.4" />
+          <line x1="300" y1="300" x2={x} y2={y} stroke="rgba(154,167,173,0.4)" strokeWidth="1" />
+          <circle cx={x} cy={y} r="4" fill="none" stroke={STEEL} strokeWidth="1.4" />
         </g>
       ))}
 
@@ -767,8 +768,8 @@ export function ShopStreamVisual() {
             width="184"
             height="58"
             rx="3"
-            fill={i === 0 ? "rgba(35,209,139,0.08)" : "rgba(255,255,255,0.025)"}
-            stroke={i === 0 ? "rgba(35,209,139,0.4)" : LINE}
+            fill={i === 0 ? "rgba(216,199,160,0.08)" : "rgba(255,255,255,0.025)"}
+            stroke={i === 0 ? "rgba(216,199,160,0.4)" : LINE}
           />
           <rect x="594" y={r2(92 + i * 72)} width="38" height="38" rx="2" fill={`${INK}0.08)`} />
           <Lines x={642} y={r2(96 + i * 72)} widths={[92, 58]} gap={12} h={4} opacity={i === 0 ? 0.3 : 0.14} />
@@ -776,7 +777,7 @@ export function ShopStreamVisual() {
             x="758"
             y={r2(128 + i * 72)}
             fontSize="8"
-            fill={i === 0 ? ACCENT : `${INK}0.3)`}
+            fill={i === 0 ? METAL : `${INK}0.3)`}
             fontFamily="monospace"
             textAnchor="end"
           >
@@ -790,7 +791,7 @@ export function ShopStreamVisual() {
       <text x="40" y="472" fontSize="8" fill={`${INK}0.34)`} fontFamily="monospace">
         INFERENCE
       </text>
-      <text x="120" y="472" fontSize="8" fill={ACCENT} fontFamily="monospace">
+      <text x="120" y="472" fontSize="8" fill={METAL} fontFamily="monospace">
         12ms
       </text>
       <text x="200" y="472" fontSize="8" fill={`${INK}0.34)`} fontFamily="monospace">

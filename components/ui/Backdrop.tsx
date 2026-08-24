@@ -47,7 +47,7 @@ export default function Backdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #0d1013 0%, #0a0b0e 38%, #07080a 72%, #060709 100%)",
+            "linear-gradient(180deg, #101214 0%, #0c0d10 38%, #0b0c0e 72%, #0a0b0d 100%)",
         }}
       />
 
@@ -62,12 +62,12 @@ export default function Backdrop() {
           maxWidth: 1100,
           maxHeight: 1100,
           background:
-            "radial-gradient(circle, rgba(35,209,139,0.11) 0%, rgba(35,209,139,0.03) 38%, transparent 68%)",
+            "radial-gradient(circle, rgba(216,199,160,0.07) 0%, rgba(216,199,160,0.02) 38%, transparent 68%)",
           filter: "blur(20px)",
         }}
       />
 
-      {/* Cool counterweight so the accent does not tint the whole page */}
+      {/* Steel counterweight keeps the warm bloom from tinting the whole page */}
       <div
         className="absolute"
         style={{
@@ -77,7 +77,7 @@ export default function Backdrop() {
           height: "60vw",
           maxWidth: 900,
           maxHeight: 900,
-          background: "radial-gradient(circle, rgba(120,150,180,0.05) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(154,167,173,0.045) 0%, transparent 65%)",
           filter: "blur(30px)",
         }}
       />
@@ -106,7 +106,7 @@ export default function Backdrop() {
             width: LIGHT,
             height: LIGHT,
             background:
-              "radial-gradient(circle, rgba(255,255,255,0.045) 0%, rgba(35,209,139,0.03) 40%, transparent 68%)",
+              "radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(216,199,160,0.02) 40%, transparent 68%)",
           }}
         />
       )}
@@ -116,7 +116,7 @@ export default function Backdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 95% 85% at 50% 40%, transparent 45%, rgba(4,5,7,0.7) 100%)",
+            "radial-gradient(ellipse 95% 85% at 50% 40%, transparent 45%, rgba(8,9,11,0.7) 100%)",
         }}
       />
     </div>

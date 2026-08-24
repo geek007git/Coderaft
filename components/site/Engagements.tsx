@@ -65,7 +65,7 @@ export default function Engagements() {
                           key={item}
                           className="mono flex items-baseline gap-3 border-t border-line py-2.5 text-[0.78rem] text-ink-3"
                         >
-                          <span className="bg-accent mt-1.5 h-1 w-1 shrink-0 rotate-45" />
+                          <span className="bg-ink-5 mt-1.5 h-1 w-1 shrink-0 rotate-45" />
                           {item}
                         </li>
                       ))}

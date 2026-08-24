@@ -21,8 +21,8 @@ function SectorTrace({ seed }: { seed: string }) {
 
   return (
     <svg viewBox="0 0 300 120" fill="none" className="h-20 w-full" aria-hidden>
-      <line x1="0" y1="60" x2="300" y2="60" stroke="rgba(255,255,255,0.07)" />
-      <polyline points={points} stroke="var(--color-accent)" strokeWidth="1.3" />
+      <line x1="0" y1="60" x2="300" y2="60" stroke="rgba(255,255,255,0.08)" />
+      <polyline points={points} stroke="var(--color-steel)" strokeWidth="1.3" />
     </svg>
   );
 }

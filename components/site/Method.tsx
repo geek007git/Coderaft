@@ -73,7 +73,7 @@ export default function Method() {
               </ul>
 
               {/* The human voice */}
-              <blockquote className="border-l-2 border-accent pl-5">
+              <blockquote className="border-l-2 border-accent-dim pl-5">
                 <p className="editorial text-[1.05rem] leading-relaxed text-ink-2">{phase.note}</p>
               </blockquote>
             </div>

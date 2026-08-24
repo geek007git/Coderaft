@@ -16,7 +16,7 @@ function Spine() {
         [0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="bg-accent absolute left-1/2 h-10 w-px -translate-x-1/2"
+            className="bg-steel absolute left-1/2 h-10 w-px -translate-x-1/2"
             style={{
               maskImage: "linear-gradient(180deg, transparent, #000)",
               WebkitMaskImage: "linear-gradient(180deg, transparent, #000)",
@@ -46,7 +46,7 @@ export default function Systems() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, transparent, rgba(15,17,20,0.75) 12%, rgba(15,17,20,0.75) 88%, transparent)",
+            "linear-gradient(180deg, transparent, rgba(17,19,22,0.7) 12%, rgba(17,19,22,0.7) 88%, transparent)",
         }}
         aria-hidden
       />

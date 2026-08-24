@@ -62,13 +62,13 @@ export default function Nav() {
         <motion.div
           className="border-b"
           animate={{
-            backgroundColor: condensed ? "rgba(10,11,14,0.62)" : "rgba(10,11,14,0)",
-            borderBottomColor: condensed ? "rgba(255,255,255,0.09)" : "rgba(255,255,255,0)",
+            backgroundColor: condensed ? "rgba(17,19,22,0.6)" : "rgba(17,19,22,0)",
+            borderBottomColor: condensed ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0)",
           }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            backdropFilter: condensed ? "blur(22px) saturate(160%)" : "none",
-            WebkitBackdropFilter: condensed ? "blur(22px) saturate(160%)" : "none",
+            backdropFilter: condensed ? "blur(22px) saturate(140%)" : "none",
+            WebkitBackdropFilter: condensed ? "blur(22px) saturate(140%)" : "none",
           }}
         >
           <div className="page">
@@ -157,7 +157,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.28 }}
             className="fixed inset-0 z-50 md:hidden"
-            style={{ background: "rgba(7,8,10,0.97)", backdropFilter: "blur(20px)" }}
+            style={{ background: "rgba(11,12,14,0.97)", backdropFilter: "blur(20px)" }}
           >
             <div className="page flex h-full flex-col justify-center gap-2 pt-20 pb-16">
               {nav.map((link, i) => (
