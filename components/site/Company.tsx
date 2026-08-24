@@ -12,8 +12,8 @@ export default function Company() {
           title={<>An engineering studio.</>}
           lead={
             <>
-              {studio.name} designs, builds, and operates software systems — across the whole
-              stack, owning the whole path.
+              {studio.name} designs, builds, and operates software systems — the whole stack,
+              because failures don&apos;t respect job titles.
             </>
           }
         />

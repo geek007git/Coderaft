@@ -38,7 +38,7 @@ export default function Sectors() {
           index="04"
           label="Sectors"
           title={<>Where the work lands.</>}
-          lead="The discipline is the same everywhere. What changes is the failure that matters most."
+          lead="Every industry thinks its software problems are unique. The stack traces disagree."
         />
 
         <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-16">

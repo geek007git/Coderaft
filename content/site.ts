@@ -87,7 +87,7 @@ export const projects: Project[] = [
       "Next.js front end against a FastAPI service layer, with PostgreSQL holding scheduling state behind exclusion constraints and S3 for clinical documents. Notifications fan out through a queue.",
     outcome:
       "Running across 24 clinics with role-scoped access for clinicians, reception, and administrators. Scheduling conflicts have not recurred since the constraint went in.",
-    note: "Scheduling conflicts were resolved server-side with an exclusion constraint rather than in application code — the database became the single arbiter of truth, and double-booking stopped being possible.",
+    note: "Double-booking was not fixed in application code — it was made impossible in the schema. The database does not negotiate.",
     layout: "wide",
   },
   {
@@ -110,7 +110,7 @@ export const projects: Project[] = [
       "Transactions land on a stream processor that maintains rolling aggregates and anomaly scores; the React dashboard reads those materialised views rather than querying raw events.",
     outcome:
       "Four million events a day summarised in under two seconds, with flagged transactions surfaced to analysts while the window is still open.",
-    note: "Anomaly scoring runs on a rolling window in the stream processor, so the dashboard reads pre-computed state instead of aggregating on every page load.",
+    note: "Every number on screen was computed before anyone asked for it. Dashboards should read, not think.",
     layout: "left",
   },
   {
@@ -133,7 +133,7 @@ export const projects: Project[] = [
       "A FastAPI gateway terminating OAuth 2.0, verifying JWTs once, and passing a signed identity context downstream. Redis backs sliding-window rate limits; every decision is written to an append-only audit log.",
     outcome:
       "Sustains 8,500 requests per second with four milliseconds of auth overhead, and a seven-year immutable audit trail that satisfies review without extra tooling.",
-    note: "Rate limits are enforced with a sliding-window counter in Redis. A fixed window let clients burst across the boundary at twice the intended rate, which showed up immediately in load testing.",
+    note: "A fixed window lets clients burst at double the limit right across the boundary. Load testing found the cheaters in minutes — so the window slides.",
     layout: "right",
   },
   {
@@ -156,7 +156,7 @@ export const projects: Project[] = [
       "A Python control plane reconciling Kubernetes state, streaming metrics to the browser over one multiplexed WebSocket, with Terraform describing every environment it manages.",
     outcome:
       "Twelve clusters and 340 nodes under one view, and a 31% reduction in monthly spend after idle capacity became visible.",
-    note: "Metrics stream over a single multiplexed WebSocket rather than per-widget polling. One connection replaced roughly sixty requests a minute per open dashboard.",
+    note: "One multiplexed WebSocket replaced sixty polls a minute per open dashboard. The servers noticed immediately.",
     layout: "left",
   },
   {
@@ -179,7 +179,7 @@ export const projects: Project[] = [
       "Next.js and Node against PostgreSQL, with learner progress stored as an append-only event log and Redis fronting the read models that power cohort analytics.",
     outcome:
       "Supports 6,800 learners and 400 concurrent streams; regrading a cohort is a replay of the log rather than a data migration.",
-    note: "Progress is stored as an append-only event log. Recomputing a cohort's analytics after a grading change became a replay instead of a migration.",
+    note: "Regrading a cohort is a replay, not a migration. The log remembers so nobody else has to.",
     layout: "right",
   },
   {
@@ -202,7 +202,7 @@ export const projects: Project[] = [
       "Collaborative-filtering embeddings recomputed nightly in a batch job and served from a warm Redis cache behind a FastAPI inference endpoint. The serving path never trains.",
     outcome:
       "Twelve-millisecond inference across a 180,000-item catalogue, with an 18% click-through uplift over the previous rules-based ordering.",
-    note: "Embeddings are recomputed nightly and served from a warm cache. Live inference reads vectors; it never trains, which keeps the p99 flat under traffic spikes.",
+    note: "The serving path never trains — inference just reads the menu, and nobody cooks during the dinner rush. The p99 stays flat.",
     layout: "wide",
   },
 ];
@@ -328,7 +328,7 @@ export const capabilities: Capability[] = [
     index: "02",
     title: "System Engineering",
     statement:
-      "The parts users never see. Services, contracts, and infrastructure built to survive traffic, failure, and time.",
+      "The parts users never notice. For infrastructure, that is the highest compliment there is.",
     disciplines: [
       "APIs & contracts",
       "Distributed systems",
@@ -358,7 +358,7 @@ export const capabilities: Capability[] = [
     index: "04",
     title: "Security",
     statement:
-      "Identity, boundaries, and blast radius considered at design time — not retrofitted after an incident.",
+      "Identity, boundaries, and blast radius decided at design time — 'we'll add auth later' is how incidents introduce themselves.",
     disciplines: [
       "Application security",
       "Infrastructure security",
@@ -387,7 +387,7 @@ export const sectors: Sector[] = [
   {
     id: "fintech",
     name: "Fintech",
-    focus: "Ledgers, reconciliation, and reporting where a rounding error is a defect.",
+    focus: "Ledgers, reconciliation, and reporting — where a rounding error is a crime scene.",
     projects: "07",
     systems: ["Double-entry ledgers", "Payment rails", "Fraud signals"],
   },
@@ -422,7 +422,7 @@ export const sectors: Sector[] = [
   {
     id: "cybersecurity",
     name: "Cybersecurity",
-    focus: "Gateways, identity, and audit trails built to be examined after the fact.",
+    focus: "Gateways, identity, and audit trails written for the day they are read in court.",
     projects: "05",
     systems: ["Zero-trust gateways", "Identity", "Audit logging"],
   },
@@ -443,21 +443,21 @@ export const sectors: Sector[] = [
   {
     id: "ai",
     name: "AI / ML",
-    focus: "Models in production, with evaluation and retrieval around them.",
+    focus: "Models in production, wrapped in the evaluation that catches them bluffing.",
     projects: "07",
     systems: ["Retrieval", "Inference APIs", "Evaluation"],
   },
   {
     id: "cloud",
     name: "Cloud",
-    focus: "Infrastructure described in code and rebuilt from it on demand.",
+    focus: "Infrastructure you can delete on purpose — and rebuild from code before lunch.",
     projects: "11",
     systems: ["Terraform", "Kubernetes", "Cost control"],
   },
   {
     id: "iot",
     name: "IoT",
-    focus: "Device fleets and telemetry that keep working over unreliable networks.",
+    focus: "Device fleets that keep reporting even when the network lies.",
     projects: "04",
     systems: ["Device registry", "Telemetry", "Edge buffering"],
   },
@@ -508,7 +508,7 @@ export const engagements: Engagement[] = [
     audience: "Startups & Companies",
     title: "Product & Platform",
     statement:
-      "From a first working version to a platform under real load, with the infrastructure and operational discipline that keeps it running.",
+      "From first working version to platform under real load. Success is the first stress test — we build you to pass it.",
     scope: [
       "MVP development",
       "SaaS platform engineering",
@@ -633,12 +633,12 @@ export const principles = [
   {
     index: "05",
     title: "Write it down",
-    body: "Architecture decisions, trade-offs, and the reasoning behind them. The next engineer is often you, a year later.",
+    body: "Architecture decisions, trade-offs, and the reasoning behind them. The engineer who curses this code next year is usually you.",
   },
   {
     index: "06",
     title: "Stay after delivery",
-    body: "We maintain what we build. Knowing we will operate it changes how we build it.",
+    body: "We maintain what we build. Knowing a bad decision can wake us at 3 a.m. is the best code review there is.",
   },
 ] as const;
 

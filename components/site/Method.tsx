@@ -23,7 +23,7 @@ export default function Method() {
           index="05"
           label="Method"
           title={<>Six phases, in order.</>}
-          lead="The expensive mistakes are made early — so the sequence never changes."
+          lead="Every expensive mistake is cheap in week one. That is the whole method."
           aside={
             <div className="mono text-sm text-ink-3">
               <div className="text-ink">~9 weeks</div>

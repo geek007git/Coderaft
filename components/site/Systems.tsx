@@ -56,7 +56,7 @@ export default function Systems() {
           index="03"
           label="Systems"
           title={<>How a request moves.</>}
-          lead="Every platform we build resolves to the same seven tiers. Select one to see what it owns."
+          lead="Every system we build is the same seven tiers wearing different names. Select one to see what it owns."
           aside={
             <div className="mono text-sm">
               <div className="text-accent">7 tiers</div>
