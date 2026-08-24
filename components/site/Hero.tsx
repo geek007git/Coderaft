@@ -89,12 +89,13 @@ export default function Hero() {
             </h1>
 
             <motion.p
-              className="editorial mt-8 max-w-[34ch] text-xl text-ink-2 lg:text-2xl"
+              className="editorial mt-8 max-w-[38ch] text-xl text-ink-2 lg:text-[1.7rem] lg:leading-snug"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.75 }}
             >
-              Systems that stay up, stay fast, and stay maintainable — years after handover.
+              Launch day is easy. We build for <span className="text-accent">year three</span> —
+              when traffic has tripled and we&apos;re no longer in the room.
             </motion.p>
 
             <motion.div
