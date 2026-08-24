@@ -55,7 +55,7 @@ export default function Method() {
               <span className="label">{phase.duration}</span>
             </div>
 
-            <div className="glass-2 flex-1 rounded-lg p-7 transition-colors duration-500 group-hover:border-[var(--color-line-2)]">
+            <div className="glass-2 lift flex-1 rounded-lg p-7">
               <h3 className="display mb-4 text-[1.75rem] text-ink">{phase.name}</h3>
               <p className="mb-7 leading-relaxed text-ink-2">{phase.summary}</p>
 

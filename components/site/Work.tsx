@@ -38,7 +38,7 @@ function Metrics({ metrics }: { metrics: Project["metrics"] }) {
 function Visual({ id, name }: { id: string; name: string }) {
   const Render = projectVisuals[id];
   return (
-    <div className="group/vis relative aspect-[8/5] w-full overflow-hidden rounded-md border border-line bg-[rgba(11,12,14,0.75)]">
+    <div className="group/vis lift relative aspect-[8/5] w-full overflow-hidden rounded-lg border border-line bg-[rgba(11,12,14,0.75)]">
       <div className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/vis:scale-[1.025]">
         {Render ? <Render /> : null}
       </div>
