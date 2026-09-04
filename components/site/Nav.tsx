@@ -127,8 +127,9 @@ export default function Nav() {
                 <a
                   href="#contact"
                   onClick={(e) => go(e, "#contact")}
-                  className="label hidden text-ink transition-colors hover:text-accent sm:inline-flex"
+                  className="label hidden items-center gap-2 text-ink transition-colors hover:text-accent sm:inline-flex"
                 >
+                  <span className="bg-accent pulse-dot h-1.5 w-1.5 rounded-full" />
                   Start a project
                 </a>
 

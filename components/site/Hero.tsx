@@ -44,6 +44,31 @@ export default function Hero() {
             >
               <SystemStack />
             </motion.div>
+
+            {/* Live readout — primary glass, because it is a real control surface */}
+            <motion.div
+              className="glass-1 glass-edge absolute right-0 bottom-2 hidden w-[15rem] rounded-md p-4 lg:block"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="label mb-3 flex items-center justify-between">
+                <span>Request path</span>
+                <span className="text-accent">live</span>
+              </div>
+              <dl className="space-y-1.5">
+                {[
+                  ["Tiers", "5"],
+                  ["Hops", "4"],
+                  ["p95", "180ms"],
+                ].map(([k, v]) => (
+                  <div key={k} className="mono flex items-baseline justify-between text-[0.7rem]">
+                    <dt className="text-ink-4">{k}</dt>
+                    <dd className="text-ink-2">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </motion.div>
           </div>
 
           {/* Headline */}
@@ -97,8 +122,9 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 1 }}
         >
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-2">
-            {heroDisciplines.map((d) => (
-              <li key={d} className="label">
+            {heroDisciplines.map((d, i) => (
+              <li key={d} className="label flex items-center gap-3">
+                <span className="text-ink-4">{String(i + 1).padStart(2, "0")}</span>
                 {d}
               </li>
             ))}

@@ -87,7 +87,7 @@ export const projects: Project[] = [
       "Next.js front end against a FastAPI service layer, with PostgreSQL holding scheduling state behind exclusion constraints and S3 for clinical documents. Notifications fan out through a queue.",
     outcome:
       "Running across 24 clinics with role-scoped access for clinicians, reception, and administrators. Scheduling conflicts have not recurred since the constraint went in.",
-    note: "The fix was an exclusion constraint over a tstzrange, not application code. Two receptionists racing for the same slot now get a constraint violation instead of a booking.",
+    note: "Double-booking was not fixed in application code — it was made impossible in the schema. The database does not negotiate.",
     layout: "wide",
   },
   {
@@ -110,7 +110,7 @@ export const projects: Project[] = [
       "Transactions land on a stream processor that maintains rolling aggregates and anomaly scores; the React dashboard reads those materialised views rather than querying raw events.",
     outcome:
       "Four million events a day summarised in under two seconds, with flagged transactions surfaced to analysts while the window is still open.",
-    note: "The dashboard reads materialised views and never touches raw events. Every number on screen was computed before anyone opened the page.",
+    note: "Every number on screen was computed before anyone asked for it. Dashboards should read, not think.",
     layout: "left",
   },
   {
@@ -133,7 +133,7 @@ export const projects: Project[] = [
       "A FastAPI gateway terminating OAuth 2.0, verifying JWTs once, and passing a signed identity context downstream. Redis backs sliding-window rate limits; every decision is written to an append-only audit log.",
     outcome:
       "Sustains 8,500 requests per second with four milliseconds of auth overhead, and a seven-year immutable audit trail that satisfies review without extra tooling.",
-    note: "We shipped a fixed-window limiter first. Load testing showed a client could burst to double the limit across the boundary, so it became a sliding window before launch.",
+    note: "A fixed window lets clients burst at double the limit right across the boundary. Load testing found the cheaters in minutes — so the window slides.",
     layout: "right",
   },
   {
@@ -156,7 +156,7 @@ export const projects: Project[] = [
       "A Python control plane reconciling Kubernetes state, streaming metrics to the browser over one multiplexed WebSocket, with Terraform describing every environment it manages.",
     outcome:
       "Twelve clusters and 340 nodes under one view, and a 31% reduction in monthly spend after idle capacity became visible.",
-    note: "Metrics stream over one multiplexed connection rather than per-panel polling. Sixty requests a minute per open dashboard became one.",
+    note: "One multiplexed WebSocket replaced sixty polls a minute per open dashboard. The servers noticed immediately.",
     layout: "left",
   },
   {
@@ -179,7 +179,7 @@ export const projects: Project[] = [
       "Next.js and Node against PostgreSQL, with learner progress stored as an append-only event log and Redis fronting the read models that power cohort analytics.",
     outcome:
       "Supports 6,800 learners and 400 concurrent streams; regrading a cohort is a replay of the log rather than a data migration.",
-    note: "Progress is an append-only log, so regrading a cohort replays events instead of migrating rows. It cost about a week up front and has paid for itself twice since.",
+    note: "Regrading a cohort is a replay, not a migration. The log remembers so nobody else has to.",
     layout: "right",
   },
   {
@@ -202,7 +202,7 @@ export const projects: Project[] = [
       "Collaborative-filtering embeddings recomputed nightly in a batch job and served from a warm Redis cache behind a FastAPI inference endpoint. The serving path never trains.",
     outcome:
       "Twelve-millisecond inference across a 180,000-item catalogue, with an 18% click-through uplift over the previous rules-based ordering.",
-    note: "Training runs nightly and offline; the serving path only reads. Keeping the two apart is what holds p99 flat as the catalogue grows.",
+    note: "The serving path never trains — inference just reads the menu, and nobody cooks during the dinner rush. The p99 stays flat.",
     layout: "wide",
   },
 ];
@@ -387,7 +387,7 @@ export const sectors: Sector[] = [
   {
     id: "fintech",
     name: "Fintech",
-    focus: "Double-entry ledgers, reconciliation, and regulatory reporting, where every balance has to be reproducible from the log.",
+    focus: "Ledgers, reconciliation, and reporting — where a rounding error is a crime scene.",
     projects: "07",
     systems: ["Double-entry ledgers", "Payment rails", "Fraud signals"],
   },
@@ -401,7 +401,7 @@ export const sectors: Sector[] = [
   {
     id: "edtech",
     name: "Edtech",
-    focus: "Learning platforms sized for the hour a whole cohort logs in at once, not the daily average.",
+    focus: "Learning platforms that stay responsive during the hour everyone logs in at once.",
     projects: "09",
     systems: ["Live streaming", "Assessment", "Cohort analytics"],
   },
@@ -422,7 +422,7 @@ export const sectors: Sector[] = [
   {
     id: "cybersecurity",
     name: "Cybersecurity",
-    focus: "Gateways, identity, and append-only audit trails built to be read by someone who was not there at the time.",
+    focus: "Gateways, identity, and audit trails written for the day they are read in court.",
     projects: "05",
     systems: ["Zero-trust gateways", "Identity", "Audit logging"],
   },
@@ -443,14 +443,14 @@ export const sectors: Sector[] = [
   {
     id: "ai",
     name: "AI / ML",
-    focus: "Models in production behind an evaluation harness, with retrieval and inference treated as separate services.",
+    focus: "Models in production, wrapped in the evaluation that catches them bluffing.",
     projects: "07",
     systems: ["Retrieval", "Inference APIs", "Evaluation"],
   },
   {
     id: "cloud",
     name: "Cloud",
-    focus: "Infrastructure defined in code, so any environment can be destroyed and rebuilt from the repository.",
+    focus: "Infrastructure you can delete on purpose — and rebuild from code before lunch.",
     projects: "11",
     systems: ["Terraform", "Kubernetes", "Cost control"],
   },
@@ -552,7 +552,7 @@ export const phases: Phase[] = [
     summary:
       "Boundaries, data model, and failure modes are decided before any feature code is written.",
     outputs: ["System design", "Data model", "Interface contracts"],
-    note: "Most of this phase is drawing the failure modes before there is anything to fail.",
+    note: "Whiteboards are cheap. Outages are not.",
   },
   {
     index: "03",
@@ -561,7 +561,7 @@ export const phases: Phase[] = [
     summary:
       "Built in reviewed increments, each one deployable, each one covered by tests that would actually fail.",
     outputs: ["Application", "Test suites", "Review history"],
-    note: "We write the test that fails first. A suite that has never gone red is not evidence of anything.",
+    note: "A test that cannot fail is documentation wearing a costume.",
   },
   {
     index: "04",
@@ -570,7 +570,7 @@ export const phases: Phase[] = [
     summary:
       "Load, abuse, and edge conditions applied deliberately, then fixed before anyone else finds them.",
     outputs: ["Load results", "Security review", "Fixes"],
-    note: "Load and failure testing happen on our schedule, against the real topology, before anyone depends on it.",
+    note: "We would rather break it ourselves on a Tuesday than have a user break it on a Friday.",
   },
   {
     index: "05",
@@ -579,7 +579,7 @@ export const phases: Phase[] = [
     summary:
       "Infrastructure as code, pipelines, monitoring, and alerting — shipped with the product, not after it.",
     outputs: ["Pipelines", "Infrastructure", "Dashboards"],
-    note: "A deploy with a manual step in the middle is not a deploy, it is a procedure. Those drift.",
+    note: "If step four of the deploy is 'Dave remembers to press enter,' it is not finished.",
   },
   {
     index: "06",
@@ -611,33 +611,39 @@ export const stackIndex = [
 
 export const principles = [
   {
+    index: "01",
     title: "Design the system first",
-    body: "Boundaries, the data model, and the failure modes are settled before feature work begins.",
+    body: "Boundaries, data model, and failure modes are settled before feature work begins. It is the cheapest hour in the project.",
   },
   {
+    index: "02",
     title: "Constraints belong in the schema",
     body: "If invalid state cannot be written, it cannot be read. We push correctness as far down the stack as it will go.",
   },
   {
+    index: "03",
     title: "Security is a design input",
     body: "Identity, permissions, and blast radius are decided alongside the feature, not audited into it afterwards.",
   },
   {
+    index: "04",
     title: "Operability ships with the product",
-    body: "Pipelines, dashboards, alerts, and runbooks are part of the deliverable, not a follow-up ticket.",
+    body: "Pipelines, monitoring, and runbooks are part of the deliverable. A system nobody can observe is a system nobody can fix.",
   },
   {
+    index: "05",
     title: "Write it down",
-    body: "Architecture decisions and the trade-offs behind them, recorded at the time. The engineer who curses this code next year is usually you.",
+    body: "Architecture decisions, trade-offs, and the reasoning behind them. The engineer who curses this code next year is usually you.",
   },
   {
+    index: "06",
     title: "Stay after delivery",
     body: "We maintain what we build. Knowing a bad decision can wake us at 3 a.m. is the best code review there is.",
   },
 ] as const;
 
 export const studioStats = [
-  { label: "Systems delivered", value: "75" },
+  { label: "Systems delivered", value: "75+" },
   { label: "Sectors", value: "12" },
   { label: "Operating since", value: "2021" },
   { label: "Longest engagement", value: "3 yrs" },

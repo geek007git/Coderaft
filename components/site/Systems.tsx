@@ -40,7 +40,7 @@ export default function Systems() {
   const active = tiers.find((t) => t.id === activeId) ?? tiers[0];
 
   return (
-    <section id="systems" className="movement-open relative">
+    <section id="systems" className="relative py-16 lg:py-24">
       {/* This movement sits on its own ground so the architecture reads as a plate */}
       <div
         className="absolute inset-0"
@@ -56,10 +56,10 @@ export default function Systems() {
           index="03"
           label="Systems"
           title={<>How a request moves.</>}
-          lead="Most systems we build resolve to the same seven tiers under different names. Select one to see what it owns."
+          lead="Every system we build is the same seven tiers wearing different names. Select one to see what it owns."
           aside={
             <div className="mono text-sm">
-              <div className="text-ink">7 tiers</div>
+              <div className="text-accent">7 tiers</div>
               <div className="text-ink-4">one request path</div>
             </div>
           }
@@ -132,7 +132,7 @@ export default function Systems() {
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="mono text-[0.7rem] tracking-[0.16em] text-ink-3">
+                      <span className="mono text-[0.7rem] tracking-[0.16em] text-accent">
                         TIER {active.index}
                       </span>
                       <span className="label">{active.metric.label}</span>
@@ -156,7 +156,7 @@ export default function Systems() {
 
                     <div className="flex items-baseline justify-between border-t border-line pt-5">
                       <span className="label">{active.metric.label}</span>
-                      <span className="mono tnum text-2xl text-ink">{active.metric.value}</span>
+                      <span className="mono text-2xl text-accent">{active.metric.value}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

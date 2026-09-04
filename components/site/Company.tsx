@@ -4,7 +4,7 @@ import { principles, stackIndex, studio, studioStats } from "@/content/site";
 
 export default function Company() {
   return (
-    <section id="company" className="movement-open relative">
+    <section id="company" className="relative py-16 lg:py-24">
       <div className="page">
         <SectionHead
           index="07"
@@ -12,8 +12,8 @@ export default function Company() {
           title={<>An engineering studio.</>}
           lead={
             <>
-              {studio.name} designs, builds, and operates software systems — design through
-              operation, because the failures that matter cross those boundaries.
+              {studio.name} designs, builds, and operates software systems — the whole stack,
+              because failures don&apos;t respect job titles.
             </>
           }
         />
@@ -24,7 +24,7 @@ export default function Company() {
             {studioStats.map((s) => (
               <div key={s.label} className="bg-[rgba(17,19,22,0.92)] px-6 py-8">
                 <dt className="label mb-3">{s.label}</dt>
-                <dd className="display tnum text-[2.2rem] text-ink lg:text-[2.8rem]">{s.value}</dd>
+                <dd className="display text-[2.2rem] text-ink lg:text-[2.8rem]">{s.value}</dd>
               </div>
             ))}
           </dl>
@@ -41,11 +41,12 @@ export default function Company() {
 
           <RevealList className="grid gap-x-14 gap-y-10 md:grid-cols-2" stagger={0.06}>
             {principles.map((p) => (
-              <div key={p.title} className="border-t border-line pt-6">
-                <h3 className="mb-3 text-lg font-semibold tracking-[-0.02em] text-ink">
-                  {p.title}
-                </h3>
-                <p className="max-w-[46ch] text-sm leading-relaxed text-ink-3">{p.body}</p>
+              <div key={p.index} className="border-t border-line pt-6">
+                <div className="mb-3 flex items-baseline gap-4">
+                  <span className="index-num">{p.index}</span>
+                  <h3 className="text-lg font-semibold tracking-[-0.02em] text-ink">{p.title}</h3>
+                </div>
+                <p className="pl-[2.6rem] text-sm leading-relaxed text-ink-3">{p.body}</p>
               </div>
             ))}
           </RevealList>
