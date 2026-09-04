@@ -83,9 +83,12 @@ export default function Footer() {
 
         {/* Colophon */}
         <div className="mt-10 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="label">
-            © {new Date().getFullYear()} {studio.name} — {studio.location}
-          </p>
+          <div className="flex flex-col gap-1">
+            <p className="label">
+              © {new Date().getFullYear()} {studio.name} — {studio.location}
+            </p>
+            <p className="label text-ink-3">Designed and maintained by Shan</p>
+          </div>
           <p className="label">
             Built with Next.js · Type set in Archivo, Instrument Serif &amp; JetBrains Mono
           </p>
