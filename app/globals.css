@@ -12,7 +12,6 @@
 @theme {
   /* ---- Surfaces: a matte graphite ramp, warm-neutral, never pure black ---- */
   --color-void: #0b0c0e;
-  --color-base: #111316;
   --color-raise: #17191c;
   --color-lift: #1d2024;
 
@@ -30,7 +29,6 @@
 
   /* ---- Steel: the cooler second metal — engineering surfaces -------------- */
   --color-steel: #9aa7ad;
-  --color-steel-dim: #5f6a70;
 
   /* ---- Lines --------------------------------------------------------------- */
   --color-line: rgba(255, 255, 255, 0.08);
@@ -46,12 +44,10 @@
 
   /* ---- Fluid display scale ----------------------------------------------- */
   --text-d1: clamp(3.2rem, 11vw, 12rem);
-  --text-d2: clamp(2.6rem, 7.2vw, 7rem);
   --text-d3: clamp(2rem, 4.4vw, 4rem);
   --text-d4: clamp(1.5rem, 2.6vw, 2.4rem);
 
   /* ---- Radius: restrained but soft-cornered — precise, never pill-shaped. - */
-  --radius-xs: 2px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 18px;
@@ -176,6 +172,14 @@ body {
   letter-spacing: -0.042em;
 }
 
+/* Archivo is loaded with its width axis; at very large sizes the default width
+   opens up and the word loses colour. Narrowing it slightly is what keeps a
+   16rem wordmark reading as one mass. Both axes must be named — setting
+   font-variation-settings alone would drop the weight back to 400. */
+.display-narrow {
+  font-variation-settings: "wdth" 88, "wght" 660;
+}
+
 /* Editorial: the human voice — asides, notes, pull quotes. */
 .editorial {
   font-family: var(--font-editorial);
@@ -190,6 +194,14 @@ body {
   font-feature-settings: "zero" 1;
 }
 
+/* Figures that sit in a column — metrics, studio stats — need to line up.
+   Proportional numerals make a stat row look hand-kerned by accident. */
+.tnum {
+  /* Restate "zero" — .mono sets it on the same property, so listing only "tnum"
+     here would turn the slashed zero back off wherever the two are combined. */
+  font-feature-settings: "zero" 1, "tnum" 1;
+}
+
 /* The recurring small-caps technical label. */
 .label {
   font-family: var(--font-mono);
@@ -202,10 +214,6 @@ body {
 
 .label-accent {
   color: var(--color-accent);
-}
-
-.label-steel {
-  color: var(--color-steel);
 }
 
 /* Section index, e.g. 02 */
@@ -291,6 +299,20 @@ body {
   .rail {
     grid-template-columns: minmax(140px, 200px) 1fr;
   }
+}
+
+/* Section rhythm. Density follows content type rather than a single interval:
+   index-like movements (capabilities, sectors) run tight and dense, statement
+   movements (systems, company, contact) are given room. Uniform padding on every
+   section is what makes a long page read as a stack of blocks. */
+.movement-tight {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+.movement {
+  padding-block: clamp(4rem, 8vw, 6.5rem);
+}
+.movement-open {
+  padding-block: clamp(5rem, 11vw, 9rem);
 }
 
 /* ============================================================================
@@ -475,22 +497,6 @@ textarea.field {
 }
 .pulse-dot {
   animation: pulse-dot 2.4s var(--ease-in-out) infinite;
-}
-
-@keyframes dash-flow {
-  to {
-    stroke-dashoffset: -1000;
-  }
-}
-.dash-flow {
-  stroke-dasharray: 4 8;
-  animation: dash-flow 30s linear infinite;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 /* ============================================================================

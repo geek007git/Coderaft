@@ -17,7 +17,7 @@ export default function Method() {
   };
 
   return (
-    <section id="method" className="relative py-16 lg:py-24">
+    <section id="method" className="movement relative">
       <div className="page">
         <SectionHead
           index="05"
@@ -50,7 +50,7 @@ export default function Method() {
           >
             {/* Timeline edge */}
             <div className="mb-7 flex items-center gap-4">
-              <span className="mono text-[0.7rem] tracking-[0.16em] text-accent">{phase.index}</span>
+              <span className="mono text-[0.7rem] tracking-[0.16em] text-ink-3">{phase.index}</span>
               <span className="h-px flex-1 bg-line transition-colors duration-500 group-hover:bg-[var(--color-line-3)]" />
               <span className="label">{phase.duration}</span>
             </div>

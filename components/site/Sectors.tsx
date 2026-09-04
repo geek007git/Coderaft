@@ -1,117 +1,72 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
 import SectionHead from "@/components/ui/SectionHead";
 import { sectors } from "@/content/site";
 
 /**
- * A signal trace unique to each sector — derived from the name, so every sector
- * gets a distinct but consistent mark without shipping twelve illustrations.
+ * Twelve sectors is reference material, not a gallery — so it is set as an index
+ * rather than a selector with a detail panel. Systems already owns the
+ * list-plus-panel pattern; repeating it here would make two adjacent movements
+ * read as one template used twice.
+ *
+ * Being a plain table also means no state, no client bundle.
  */
-function SectorTrace({ seed }: { seed: string }) {
-  const code = seed.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-  const points = Array.from({ length: 28 }, (_, i) => {
-    const v = Math.sin((i + code) / 3.1) * 0.5 + Math.sin((i * (code % 7) + code) / 5.7) * 0.4;
-    const x = Math.round((i / 27) * 300 * 100) / 100;
-    const y = Math.round((60 - v * 42) * 100) / 100;
-    return `${x},${y}`;
-  }).join(" ");
-
-  return (
-    <svg viewBox="0 0 300 120" fill="none" className="h-20 w-full" aria-hidden>
-      <line x1="0" y1="60" x2="300" y2="60" stroke="rgba(255,255,255,0.08)" />
-      <polyline points={points} stroke="var(--color-steel)" strokeWidth="1.3" />
-    </svg>
-  );
-}
-
 export default function Sectors() {
-  const [activeId, setActiveId] = useState(sectors[0].id);
-  const active = sectors.find((s) => s.id === activeId) ?? sectors[0];
-
   return (
-    <section id="sectors" className="relative py-16 lg:py-24">
+    <section id="sectors" className="movement-tight relative">
       <div className="page">
         <SectionHead
           index="04"
           label="Sectors"
           title={<>Where the work lands.</>}
-          lead="Every industry thinks its software problems are unique. The stack traces disagree."
+          lead="Twelve sectors, seventy-five systems. The domain language changes far more than the architecture does."
+          aside={
+            <div className="mono text-sm text-ink-3">
+              <div className="tnum text-ink">75 systems</div>
+              <div className="text-ink-4">2021—2024</div>
+            </div>
+          }
         />
 
-        <div className="mt-10 grid gap-10 lg:mt-14 lg:grid-cols-12 lg:gap-16">
-          {/* The typographic index */}
-          <div className="lg:col-span-7">
-            <ul className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
-              {sectors.map((sector) => {
-                const on = sector.id === active.id;
-                return (
-                  <li key={sector.id}>
-                    <button
-                      onMouseEnter={() => setActiveId(sector.id)}
-                      onFocus={() => setActiveId(sector.id)}
-                      onClick={() => setActiveId(sector.id)}
-                      aria-pressed={on}
-                      className="display block py-1 text-[2rem] transition-all duration-300 sm:text-[2.6rem] lg:text-[3.1rem]"
-                      style={{
-                        color: on ? "var(--color-ink)" : "var(--color-ink-5)",
-                        transform: on ? "translateY(-2px)" : "none",
-                      }}
-                    >
-                      {sector.name}
-                      <sup className="mono ml-1.5 align-super text-[0.62rem] tracking-normal">
-                        {sector.projects}
-                      </sup>
-                    </button>
-                  </li>
-                );
-              })}
+        <Reveal delay={0.06}>
+          <div className="mt-10 lg:mt-14">
+            {/* Column headings, shown once — the rows below inherit their meaning
+                from here rather than repeating a label each time. */}
+            <div className="label hidden grid-cols-12 gap-8 border-b border-line-2 pb-3 lg:grid">
+              <span className="col-span-3">Sector</span>
+              <span className="col-span-5">Focus</span>
+              <span className="col-span-3">Typical systems</span>
+              <span className="col-span-1 text-right">Built</span>
+            </div>
+
+            <ul>
+              {sectors.map((sector) => (
+                <li
+                  key={sector.id}
+                  className="group grid grid-cols-1 gap-x-8 gap-y-3 border-b border-line py-6 transition-colors duration-300 hover:border-line-3 lg:grid-cols-12 lg:items-baseline"
+                >
+                  <h3 className="display col-span-3 text-[1.5rem] text-ink transition-transform duration-500 group-hover:translate-x-1 lg:text-[1.75rem]">
+                    {sector.name}
+                  </h3>
+
+                  <p className="col-span-5 leading-relaxed text-ink-2">{sector.focus}</p>
+
+                  <ul className="col-span-3 flex flex-wrap gap-x-4 gap-y-1.5">
+                    {sector.systems.map((sys) => (
+                      <li key={sys} className="mono text-[0.78rem] text-ink-4">
+                        {sys}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <span className="mono tnum col-span-1 text-[0.8rem] text-ink-3 lg:text-right">
+                    {sector.projects}
+                    <span className="ml-1.5 text-ink-4 lg:hidden">built</span>
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
-
-          {/* Preview */}
-          <div className="lg:col-span-5">
-            <Reveal from="right">
-              <div className="glass-2 rounded-lg p-7 lg:sticky lg:top-28">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className="mb-5 flex items-baseline justify-between">
-                      <span className="label label-accent">{active.name}</span>
-                      <span className="mono text-[0.7rem] text-ink-4">
-                        {active.projects} SYSTEMS
-                      </span>
-                    </div>
-
-                    <SectorTrace seed={active.id} />
-
-                    <p className="mt-5 mb-7 leading-relaxed text-ink-2">{active.focus}</p>
-
-                    <span className="label mb-3 block">Typical scope</span>
-                    <ul className="space-y-2">
-                      {active.systems.map((sys) => (
-                        <li
-                          key={sys}
-                          className="mono flex items-center gap-3 border-t border-line pt-2 text-[0.78rem] text-ink-3"
-                        >
-                          <span className="bg-ink-5 h-1 w-1 rotate-45" />
-                          {sys}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

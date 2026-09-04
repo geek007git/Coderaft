@@ -56,13 +56,13 @@ const glyphs: Record<string, ReactNode> = {
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="relative py-16 lg:py-24">
+    <section id="capabilities" className="movement-tight relative">
       <div className="page">
         <SectionHead
           index="02"
           label="Capabilities"
           title={<>Four practices, one team.</>}
-          lead="The people who design it are the people on call for it. Incentives do the rest."
+          lead="Four practices, one team, one pager rotation. The people who design a system are the people on call for it."
         />
 
         <div className="mt-10 lg:mt-14">

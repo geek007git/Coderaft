@@ -21,8 +21,8 @@ export default function Footer() {
         {/* Wordmark as a closing statement */}
         <div className="mb-12 overflow-hidden">
           <span
-            className="display block leading-[0.8] text-ink"
-            style={{ fontSize: "clamp(3.5rem, 17vw, 17rem)", letterSpacing: "-0.05em" }}
+            className="display display-narrow block leading-[0.8] text-ink"
+            style={{ fontSize: "clamp(3.5rem, 17vw, 17rem)", letterSpacing: "-0.045em" }}
           >
             {studio.name}
           </span>
@@ -83,12 +83,25 @@ export default function Footer() {
 
         {/* Colophon */}
         <div className="mt-10 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="label">
-            © {new Date().getFullYear()} {studio.name} — {studio.location}
-          </p>
-          <p className="label">
-            Built with Next.js · Type set in Archivo, Instrument Serif &amp; JetBrains Mono
-          </p>
+          <div className="flex flex-col gap-1">
+            <p className="label">
+              © {new Date().getFullYear()} {studio.name} — {studio.location}
+            </p>
+            <p className="label text-ink-3">Designed and maintained by Shan</p>
+          </div>
+          <a
+            href="#top"
+            onClick={(e) => go(e, "#top")}
+            className="label group flex items-center gap-2 transition-colors hover:text-ink"
+          >
+            Back to top
+            <span
+              className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5"
+              aria-hidden
+            >
+              ↑
+            </span>
+          </a>
         </div>
       </div>
     </footer>

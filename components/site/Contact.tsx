@@ -35,32 +35,29 @@ const EMPTY: FormState = {
   description: "",
 };
 
-/** A numbered field row. The index keeps the form reading as a document. */
+/** One field row. Short fields sit two-up on wider screens so the form reads as
+ *  a form rather than a nine-item questionnaire. */
 function Field({
-  index,
   label,
   required,
   children,
   htmlFor,
+  wide,
 }: {
-  index: string;
   label: string;
   required?: boolean;
   children: ReactNode;
   htmlFor: string;
+  /** Span both columns — for the long-form fields. */
+  wide?: boolean;
 }) {
   return (
-    <div className="grid gap-2 py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-6">
-      <label htmlFor={htmlFor} className="label pt-4">
-        {index}
+    <div className={wide ? "py-5 sm:col-span-2" : "py-5"}>
+      <label htmlFor={htmlFor} className="label mb-1 block normal-case">
+        {label}
+        {required && <span className="text-ink-4"> (required)</span>}
       </label>
-      <div>
-        <label htmlFor={htmlFor} className="label mb-1 block normal-case">
-          {label}
-          {required && <span className="text-accent"> *</span>}
-        </label>
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
@@ -127,7 +124,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-16 lg:py-24">
+    <section id="contact" className="movement-open relative">
       <div className="page">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           {/* Statement */}
@@ -164,10 +161,7 @@ export default function Contact() {
                 </div>
                 <div className="flex items-baseline justify-between gap-6">
                   <span className="label">Status</span>
-                  <span className="mono flex items-center gap-2 text-sm text-accent">
-                    <span className="bg-accent pulse-dot h-1.5 w-1.5 rounded-full" />
-                    {studio.availability}
-                  </span>
+                  <span className="mono text-sm text-accent">{studio.availability}</span>
                 </div>
               </div>
             </Reveal>
@@ -197,21 +191,20 @@ export default function Contact() {
               </motion.div>
             ) : (
               <Reveal from="right">
-                <form onSubmit={submit} className="divide-y divide-[var(--color-line)]">
-                  <Field index="01" label="Name" required htmlFor="name">
+                <form onSubmit={submit} className="grid gap-x-10 sm:grid-cols-2">
+                  <Field label="Name" required htmlFor="name">
                     <input
                       id="name"
                       type="text"
                       name="name"
                       required
-                      placeholder="Your name"
                       value={form.name}
                       onChange={update}
                       className="field"
                     />
                   </Field>
 
-                  <Field index="02" label="Email" required htmlFor="email">
+                  <Field label="Email" required htmlFor="email">
                     <input
                       id="email"
                       type="email"
@@ -224,7 +217,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="03" label="Organization or institution" htmlFor="organization">
+                  <Field label="Organization or institution" htmlFor="organization" wide>
                     <input
                       id="organization"
                       type="text"
@@ -236,7 +229,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="04" label="Project type" required htmlFor="projectType">
+                  <Field label="Project type" required htmlFor="projectType">
                     <Select
                       id="projectType"
                       name="projectType"
@@ -248,7 +241,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="05" label="Industry" htmlFor="industry">
+                  <Field label="Industry" htmlFor="industry">
                     <Select
                       id="industry"
                       name="industry"
@@ -259,7 +252,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="06" label="Required technologies" htmlFor="technologies">
+                  <Field label="Required technologies" htmlFor="technologies" wide>
                     <input
                       id="technologies"
                       type="text"
@@ -271,7 +264,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="07" label="Budget range" htmlFor="budget">
+                  <Field label="Budget range" htmlFor="budget">
                     <Select
                       id="budget"
                       name="budget"
@@ -282,7 +275,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="08" label="Timeline" htmlFor="timeline">
+                  <Field label="Timeline" htmlFor="timeline">
                     <Select
                       id="timeline"
                       name="timeline"
@@ -293,7 +286,7 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <Field index="09" label="What are you building?" required htmlFor="description">
+                  <Field label="What are you building?" required htmlFor="description" wide>
                     <textarea
                       id="description"
                       name="description"
@@ -306,9 +299,9 @@ export default function Contact() {
                     />
                   </Field>
 
-                  <div className="flex flex-wrap items-center justify-between gap-6 pt-8">
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-8 sm:col-span-2">
                     <p className="label max-w-[28ch] normal-case">
-                      No newsletter. No sales call. One engineer, one reply.
+                      We reply to everything, including the projects we turn down.
                     </p>
                     <button type="submit" disabled={sending} className="action">
                       {sending ? "Sending…" : "Send brief"}

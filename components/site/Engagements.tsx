@@ -11,7 +11,7 @@ import { engagements } from "@/content/site";
  */
 export default function Engagements() {
   return (
-    <section id="engagements" className="relative py-16 lg:py-24">
+    <section id="engagements" className="movement relative">
       <div className="page">
         <SectionHead
           index="06"
@@ -33,12 +33,8 @@ export default function Engagements() {
                   {/* Oversized index letter */}
                   <div className={`lg:col-span-2 lg:row-start-1 ${cols.mark}`}>
                     <span
-                      className="display block leading-none"
-                      style={{
-                        fontSize: "clamp(4rem, 9vw, 8rem)",
-                        color: "transparent",
-                        WebkitTextStroke: "1px var(--color-ink-5)",
-                      }}
+                      className="display display-outline block leading-none"
+                      style={{ fontSize: "clamp(4rem, 9vw, 8rem)" }}
                       aria-hidden
                     >
                       {eng.index}

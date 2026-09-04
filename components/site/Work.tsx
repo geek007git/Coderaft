@@ -11,9 +11,9 @@ import { projects, type Project } from "@/content/site";
 function Status({ status }: { status: Project["status"] }) {
   const live = status === "DEPLOYED";
   return (
-    <span className="label flex items-center gap-2" style={{ color: live ? "var(--color-accent)" : undefined }}>
+    <span className="label flex items-center gap-2.5" style={{ color: live ? "var(--color-accent)" : undefined }}>
       <span
-        className={`h-1.5 w-1.5 rounded-full ${live ? "pulse-dot" : ""}`}
+        className="h-1 w-1 rotate-45"
         style={{ background: live ? "var(--color-accent)" : "var(--color-ink-4)" }}
       />
       {status}
@@ -27,7 +27,7 @@ function Metrics({ metrics }: { metrics: Project["metrics"] }) {
       {metrics.map((m) => (
         <div key={m.label} className="bg-[rgba(17,19,22,0.88)] px-3 py-4">
           <dt className="label mb-2 text-[0.6rem]">{m.label}</dt>
-          <dd className="mono text-lg text-ink lg:text-xl">{m.value}</dd>
+          <dd className="mono tnum text-lg text-ink lg:text-xl">{m.value}</dd>
         </div>
       ))}
     </dl>
@@ -95,7 +95,7 @@ function Entry({ project }: { project: Project }) {
   const identity = (
     <div>
       <div className="mb-5 flex items-baseline gap-4">
-        <span className="mono text-[0.7rem] tracking-[0.16em] text-accent">
+        <span className="mono text-[0.7rem] tracking-[0.16em] text-ink-3">
           PROJECT / {project.num}
         </span>
         <span className="h-px flex-1 bg-line" />
@@ -215,7 +215,7 @@ function Entry({ project }: { project: Project }) {
 
 export default function Work() {
   return (
-    <section id="work" className="relative py-16 lg:py-24">
+    <section id="work" className="movement-open relative">
       <div className="page">
         <SectionHead
           index="01"
@@ -225,7 +225,7 @@ export default function Work() {
           aside={
             <div className="mono text-sm text-ink-3">
               <div className="text-ink">{projects.length} shown</div>
-              <div className="text-ink-4">75+ delivered</div>
+              <div className="text-ink-4">75 delivered</div>
             </div>
           }
         />
